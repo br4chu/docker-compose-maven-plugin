@@ -1,7 +1,6 @@
 # Introduction
 
-docker-compose-maven-plugin is a simple plugin which starts a docker-compose cluster before running project's integration tests and shuts it down after
-integration test are finished.
+docker-compose-maven-plugin starts a docker-compose cluster before running project's integration tests and shuts it down after integration test are finished.
 
 ## Goals
 

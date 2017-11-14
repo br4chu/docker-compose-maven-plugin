@@ -9,7 +9,7 @@
     <packaging>maven-plugin</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Maven plugin which starts and stops a docker-compose cluster</description>
+    <description>Maven plugin that starts and stops a docker-compose cluster</description>
     <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
 
     <licenses>
