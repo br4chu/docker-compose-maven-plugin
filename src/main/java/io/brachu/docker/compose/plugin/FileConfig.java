@@ -6,6 +6,10 @@ class FileConfig {
 
     private String absolute;
 
+    public FileConfig() {
+        classpath = absolute = null;
+    }
+
     String getClasspath() {
         return classpath;
     }
