@@ -3,13 +3,13 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.brachu.maven.plugins</groupId>
+    <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin</artifactId>
     <version>0.1.0-SNAPSHOT</version>
     <packaging>maven-plugin</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
-    <description>Maven plugin that starts and stops a docker-compose cluster</description>
+    <description>Maven plugin that starts and stops a docker-compose cluster.</description>
     <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
 
     <licenses>
@@ -20,12 +20,15 @@
         </license>
     </licenses>
 
+    <organization>
+        <name>Brachu</name>
+        <url>https://github.com/br4chu</url>
+    </organization>
+
     <developers>
         <developer>
             <name>Marcin Jaguś</name>
             <email>marcin.jagus@protonmail.com</email>
-            <organization>Brachu</organization>
-            <organizationUrl>https://github.com/br4chu</organizationUrl>
         </developer>
     </developers>
 
@@ -57,7 +60,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
 
         <!-- Dependencies -->
-        <johann.version>0.1.0</johann.version>
+        <johann.version>0.2.0-SNAPSHOT</johann.version>
         <maven-plugin-annotations.version>3.4</maven-plugin-annotations.version>
         <maven-plugin-api.version>3.0</maven-plugin-api.version>
 

@@ -1,3 +1,3 @@
 @javax.annotation.ParametersAreNonnullByDefault
-package io.brachu.maven.plugins.docker.compose;
+package io.brachu.docker.compose.plugin;
 
