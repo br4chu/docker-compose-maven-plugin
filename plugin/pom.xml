@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -54,13 +55,14 @@
         <checkstyle.rules.path>checkstyle.xml</checkstyle.rules.path>
         <gpg.keyname>55B3E857</gpg.keyname>
         <java.version>1.8</java.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependencies -->
         <johann.version>0.2.0-SNAPSHOT</johann.version>
+        <jool.version>0.9.12</jool.version>
         <maven-plugin-annotations.version>3.4</maven-plugin-annotations.version>
         <maven-plugin-api.version>3.0</maven-plugin-api.version>
 
@@ -113,6 +115,12 @@
             <artifactId>johann</artifactId>
             <version>${johann.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jooq</groupId>
+            <artifactId>jool</artifactId>
+            <version>${jool.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -122,7 +130,7 @@
                 <artifactId>package-info-maven-plugin</artifactId>
                 <version>${package-info-plugin.version}</version>
                 <configuration>
-                    <outputDirectory>src/main/java</outputDirectory>
+                    <outputDirectory>plugin/src/main/java</outputDirectory>
                     <packages>
                         <package>
                             <annotations>
@@ -171,7 +179,7 @@
                         <id>validate</id>
                         <phase>process-sources</phase>
                         <configuration>
-                            <configLocation>${checkstyle.rules.path}</configLocation>
+                            <configLocation>checkstyle.xml</configLocation>
                             <violationSeverity>warning</violationSeverity>
                             <consoleOutput>true</consoleOutput>
                             <failsOnError>true</failsOnError>

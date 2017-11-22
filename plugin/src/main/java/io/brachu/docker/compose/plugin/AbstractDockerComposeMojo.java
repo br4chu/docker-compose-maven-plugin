@@ -3,7 +3,6 @@ package io.brachu.docker.compose.plugin;
 import java.util.Map;
 
 import io.brachu.johann.DockerCompose;
-import io.brachu.johann.exception.JohannException;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -23,10 +22,10 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     @Parameter
     private WaitConfig wait;
 
-    private DockerComposeFactory factory;
+    private DockerComposeFactory dockerComposeFactory;
 
     AbstractDockerComposeMojo() {
-        factory = new DockerComposeFactory();
+        dockerComposeFactory = new DockerComposeFactory();
     }
 
     DockerCompose dockerCompose() throws MojoFailureException {
@@ -35,8 +34,8 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
 
     DockerCompose dockerCompose(Config config) throws MojoFailureException {
         try {
-            return factory.create(config);
-        } catch (JohannException ex) {
+            return dockerComposeFactory.create(config);
+        } catch (Exception ex) {
             throw new MojoFailureException("Unexpected error while creating DockerCompose object", ex);
         }
     }

@@ -6,8 +6,9 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 
-@Mojo(name = "up", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST)
+@Mojo(name = "up", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST, requiresDependencyResolution = ResolutionScope.TEST)
 public class UpMojo extends AbstractDockerComposeMojo {
 
     @Override
@@ -25,7 +26,7 @@ public class UpMojo extends AbstractDockerComposeMojo {
             compose.up();
             compose.waitForCluster(wait.getValue(), wait.getUnit());
         } catch (JohannException ex) {
-            throw new MojoExecutionException("Unexpected exception while staring docker-compose cluster.", ex);
+            throw new MojoExecutionException("Unexpected exception while staring docker-compose cluster", ex);
         }
     }
 

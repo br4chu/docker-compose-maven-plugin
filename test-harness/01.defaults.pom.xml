@@ -1,0 +1,93 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.brachu</groupId>
+    <artifactId>docker-compose-maven-plugin-test-harness</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Testing harness for docker-compose-maven-plugin.</description>
+    <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Brachu</name>
+        <url>https://github.com/br4chu</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <name>Marcin Jaguś</name>
+            <email>marcin.jagus@protonmail.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Plugins -->
+        <failsafe-plugin.version>2.20.1</failsafe-plugin.version>
+        <docker-compose-plugin.version>0.1.0-SNAPSHOT</docker-compose-plugin.version>
+    </properties>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/src/main/resources</directory>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${failsafe-plugin.version}</version>
+                <configuration>
+                    <includes>
+                        <include>**/DefaultsIT.java</include>
+                    </includes>
+                    <excludes>
+                        <exclude>**/Abstract*.java</exclude>
+                    </excludes>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>io.brachu</groupId>
+                <artifactId>docker-compose-maven-plugin</artifactId>
+                <version>${docker-compose-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>up</goal>
+                            <goal>down</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

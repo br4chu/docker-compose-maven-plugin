@@ -16,8 +16,8 @@ class Config {
 
     private final WaitConfig wait;
 
-    public Config(@Nullable String executablePath, @Nullable FileConfig file, @Nullable String projectName, @Nullable Map<String, String> env,
-                  @Nullable WaitConfig wait) {
+    public Config(@Nullable String executablePath, @Nullable FileConfig file, @Nullable String projectName,
+                  @Nullable Map<String, String> env, @Nullable WaitConfig wait) {
 
         this.executablePath = executablePath;
         this.file = file;

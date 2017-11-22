@@ -6,7 +6,7 @@ class FileConfig {
 
     private String absolute;
 
-    public FileConfig() {
+    FileConfig() {
         classpath = absolute = null;
     }
 
