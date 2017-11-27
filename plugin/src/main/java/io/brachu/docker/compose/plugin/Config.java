@@ -1,14 +1,18 @@
 package io.brachu.docker.compose.plugin;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Map;
 
 import javax.annotation.Nullable;
+
+import org.apache.commons.lang3.StringUtils;
 
 class Config {
 
     private final String executablePath;
 
-    private final FileConfig file;
+    private final String file;
 
     private final String projectName;
 
@@ -16,38 +20,51 @@ class Config {
 
     private final WaitConfig wait;
 
-    public Config(@Nullable String executablePath, @Nullable FileConfig file, @Nullable String projectName,
-                  @Nullable Map<String, String> env, @Nullable WaitConfig wait) {
+    private final boolean clusterAlreadyUp;
 
-        this.executablePath = executablePath;
-        this.file = file;
-        this.projectName = projectName;
+    Config(@Nullable String executablePath, String projectBasedir, String file, @Nullable String projectName, @Nullable Map<String, String> env,
+           @Nullable WaitConfig wait, boolean clusterAlreadyUp) {
+
+        this.executablePath = StringUtils.trimToNull(executablePath);
+        this.file = prepareFilePath(projectBasedir, file);
+        this.projectName = StringUtils.trimToNull(projectName);
         this.env = env;
         this.wait = wait;
+        this.clusterAlreadyUp = clusterAlreadyUp;
     }
 
-    public String getExecutablePath() {
+    String getExecutablePath() {
         return executablePath;
     }
 
-    public FileConfig getFile() {
+    String getFile() {
         return file;
     }
 
-    public String getProjectName() {
+    String getProjectName() {
         return projectName;
     }
 
-    public Map<String, String> getEnv() {
+    Map<String, String> getEnv() {
         return env;
     }
 
-    public WaitConfig getWait() {
+    WaitConfig getWait() {
         if (wait != null) {
             return wait;
         } else {
             return new WaitConfig();
         }
+    }
+
+    boolean isClusterAlreadyUp() {
+        return clusterAlreadyUp;
+    }
+
+    private String prepareFilePath(String projectBasedir, String file) {
+        Path basedirPath = Paths.get(projectBasedir);
+        Path filePath = Paths.get(file);
+        return basedirPath.resolve(filePath).toString();
     }
 
 }

@@ -10,7 +10,8 @@ class DockerComposeFactory {
         DockerCompose.OngoingBuild.File file = setupBuilder(config);
         DockerCompose.OngoingBuild.Project project = setupFile(file, config);
         DockerCompose.OngoingBuild.Env env = setupProject(project, config);
-        DockerCompose.OngoingBuild.Finish finish = setupEnv(env, config);
+        DockerCompose.OngoingBuild.Tweak tweak = setupEnv(env, config);
+        DockerCompose.OngoingBuild.Finish finish = setupFinish(tweak, config);
         return finish.build();
     }
 
@@ -25,19 +26,7 @@ class DockerComposeFactory {
     }
 
     private DockerCompose.OngoingBuild.Project setupFile(DockerCompose.OngoingBuild.File file, Config config) {
-        FileConfig configFile = config.getFile();
-
-        if (configFile != null) {
-            if (configFile.getClasspath() != null) {
-                return file.classpath(configFile.getClasspath());
-            } else if (configFile.getAbsolute() != null) {
-                return file.absolute(configFile.getAbsolute());
-            } else {
-                return file.classpath();
-            }
-        } else {
-            return file.classpath();
-        }
+        return file.absolute(config.getFile());
     }
 
     private DockerCompose.OngoingBuild.Env setupProject(DockerCompose.OngoingBuild.Project project, Config config) {
@@ -50,13 +39,21 @@ class DockerComposeFactory {
         }
     }
 
-    private DockerCompose.OngoingBuild.Finish setupEnv(DockerCompose.OngoingBuild.Env env, Config config) {
+    private DockerCompose.OngoingBuild.Tweak setupEnv(DockerCompose.OngoingBuild.Env env, Config config) {
         Map<String, String> configEnv = config.getEnv();
 
         if (configEnv != null) {
             return env.env(configEnv);
         } else {
             return env;
+        }
+    }
+
+    private DockerCompose.OngoingBuild.Finish setupFinish(DockerCompose.OngoingBuild.Tweak tweak, Config config) {
+        if (config.isClusterAlreadyUp()) {
+            return tweak.alreadyStarted();
+        } else {
+            return tweak;
         }
     }
 

@@ -6,25 +6,33 @@ import io.brachu.johann.DockerCompose;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.project.MavenProject;
 
 public abstract class AbstractDockerComposeMojo extends AbstractMojo {
 
-    static final String PROJECT_NAME_SYSTEM_PROPERTY = "maven.compose.project";
+    static final String PROJECT_NAME_PROPERTY = "maven.dockerCompose.project";
+
+    @Parameter(required = true, readonly = true, defaultValue = "${project}")
+    protected MavenProject project;
+    @Parameter(required = true, readonly = true, defaultValue = "${basedir}")
+    private String basedir;
 
     @Parameter
     private String executablePath;
-    @Parameter
-    private FileConfig file;
-    @Parameter
+    @Parameter(required = true, defaultValue = "src/test/resources/docker-compose.yml")
+    private String file;
+    @Parameter(defaultValue = "${" + PROJECT_NAME_PROPERTY + "}")
     private String projectName;
     @Parameter
     private Map<String, String> env;
     @Parameter
     private WaitConfig wait;
 
+    private boolean assumeClusterUp;
     private DockerComposeFactory dockerComposeFactory;
 
-    AbstractDockerComposeMojo() {
+    AbstractDockerComposeMojo(boolean assumeClusterUp) {
+        this.assumeClusterUp = assumeClusterUp;
         dockerComposeFactory = new DockerComposeFactory();
     }
 
@@ -41,7 +49,7 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     }
 
     Config getConfig() throws MojoFailureException {
-        Config config = new Config(executablePath, file, projectName, env, wait);
+        Config config = new Config(executablePath, basedir, file, projectName, env, wait, assumeClusterUp);
         ConfigValidator.validate(config);
         return config;
     }

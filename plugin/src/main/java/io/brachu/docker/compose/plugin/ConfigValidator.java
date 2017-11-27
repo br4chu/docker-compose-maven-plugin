@@ -10,13 +10,8 @@ class ConfigValidator {
     }
 
     private static void validateFile(Config config) throws MojoFailureException {
-        if (config.getFile() != null) {
-            String absolute = config.getFile().getAbsolute();
-            String classpath = config.getFile().getClasspath();
-
-            if (absolute != null && classpath != null) {
-                throw new MojoFailureException("Absolute and classpath paths to docker-compose file cannot be both set.");
-            }
+        if (config.getFile() == null) {
+            throw new MojoFailureException("Path to docker-compose.yml file must be set.");
         }
     }
 

@@ -11,11 +11,15 @@ import org.apache.maven.plugins.annotations.ResolutionScope;
 @Mojo(name = "down", defaultPhase = LifecyclePhase.POST_INTEGRATION_TEST, requiresDependencyResolution = ResolutionScope.TEST)
 public class DownMojo extends AbstractDockerComposeMojo {
 
+    public DownMojo() {
+        super(true);
+    }
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         DockerCompose compose = dockerCompose();
 
-        clearSystemProperties();
+        clearProperties();
         down(compose);
     }
 
@@ -27,8 +31,17 @@ public class DownMojo extends AbstractDockerComposeMojo {
         }
     }
 
+    private void clearProperties() {
+        clearProjectProperties();
+        clearSystemProperties();
+    }
+
+    private void clearProjectProperties() {
+        project.getProperties().remove(PROJECT_NAME_PROPERTY);
+    }
+
     private void clearSystemProperties() {
-        System.clearProperty(PROJECT_NAME_SYSTEM_PROPERTY);
+        System.clearProperty(PROJECT_NAME_PROPERTY);
     }
 
 }
