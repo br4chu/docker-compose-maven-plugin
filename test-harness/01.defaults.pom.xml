@@ -36,13 +36,34 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.dockerCompose.project /> <!-- Added as empty so IDE won't complain about unknown property -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!-- Dependencies -->
+        <assertj.version>3.8.0</assertj.version>
+        <junit.version>4.12</junit.version>
 
         <!-- Plugins -->
         <failsafe-plugin.version>2.20.1</failsafe-plugin.version>
         <docker-compose-plugin.version>0.1.0-SNAPSHOT</docker-compose-plugin.version>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>${assertj.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <resources>
@@ -52,6 +73,20 @@
         </resources>
 
         <plugins>
+            <plugin>
+                <groupId>io.brachu</groupId>
+                <artifactId>docker-compose-maven-plugin</artifactId>
+                <version>${docker-compose-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>up</goal>
+                            <goal>down</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
@@ -63,26 +98,15 @@
                     <excludes>
                         <exclude>**/Abstract*.java</exclude>
                     </excludes>
+                    <systemPropertyVariables>
+                        <maven.dockerCompose.project>${maven.dockerCompose.project}</maven.dockerCompose.project>
+                    </systemPropertyVariables>
                 </configuration>
                 <executions>
                     <execution>
                         <goals>
                             <goal>integration-test</goal>
                             <goal>verify</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>io.brachu</groupId>
-                <artifactId>docker-compose-maven-plugin</artifactId>
-                <version>${docker-compose-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>up</goal>
-                            <goal>down</goal>
                         </goals>
                     </execution>
                 </executions>
