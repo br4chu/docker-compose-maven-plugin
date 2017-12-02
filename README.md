@@ -1,6 +1,6 @@
 # Introduction
 
-docker-compose-maven-plugin starts a docker-compose cluster before running project's integration tests and shuts it down after integration test are finished.
+**docker-compose-maven-plugin** starts a docker-compose cluster before running project's integration tests and shuts it down after integration test are finished.
 
 ## Goals
 
@@ -14,7 +14,9 @@ This project is still a work in progress and therefore cannot be used yet.
 
 # Requirements
 
-This project is dependant on [Johann](https://github.com/br4chu/johann) library and therefore inherits its requirements:
+* Maven 3+
+
+This project also depends on [Johann](https://github.com/br4chu/johann) library and inherits its requirements:
 
 * Docker Engine 1.12+ (because of health checks)
 * Docker Compose 1.14+ (because of `-f -` option)
