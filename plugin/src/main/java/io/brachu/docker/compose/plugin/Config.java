@@ -20,17 +20,14 @@ class Config {
 
     private final WaitConfig wait;
 
-    private final boolean clusterAlreadyUp;
-
     Config(@Nullable String executablePath, String projectBasedir, String file, @Nullable String projectName, @Nullable Map<String, String> env,
-           @Nullable WaitConfig wait, boolean clusterAlreadyUp) {
+           @Nullable WaitConfig wait) {
 
         this.executablePath = StringUtils.trimToNull(executablePath);
         this.file = prepareFilePath(projectBasedir, file);
         this.projectName = StringUtils.trimToNull(projectName);
         this.env = env;
         this.wait = wait;
-        this.clusterAlreadyUp = clusterAlreadyUp;
     }
 
     String getExecutablePath() {
@@ -55,10 +52,6 @@ class Config {
         } else {
             return new WaitConfig();
         }
-    }
-
-    boolean isClusterAlreadyUp() {
-        return clusterAlreadyUp;
     }
 
     private String prepareFilePath(String projectBasedir, String file) {

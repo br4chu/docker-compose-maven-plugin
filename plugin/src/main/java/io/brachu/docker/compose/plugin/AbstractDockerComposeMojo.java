@@ -28,11 +28,9 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     @Parameter
     private WaitConfig wait;
 
-    private boolean assumeClusterUp;
     private DockerComposeFactory dockerComposeFactory;
 
-    AbstractDockerComposeMojo(boolean assumeClusterUp) {
-        this.assumeClusterUp = assumeClusterUp;
+    AbstractDockerComposeMojo() {
         dockerComposeFactory = new DockerComposeFactory();
     }
 
@@ -49,7 +47,7 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     }
 
     Config getConfig() throws MojoFailureException {
-        Config config = new Config(executablePath, basedir, file, projectName, env, wait, assumeClusterUp);
+        Config config = new Config(executablePath, basedir, file, projectName, env, wait);
         ConfigValidator.validate(config);
         return config;
     }

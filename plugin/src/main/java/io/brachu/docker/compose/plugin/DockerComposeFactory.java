@@ -10,8 +10,7 @@ class DockerComposeFactory {
         DockerCompose.OngoingBuild.File file = setupBuilder(config);
         DockerCompose.OngoingBuild.Project project = setupFile(file, config);
         DockerCompose.OngoingBuild.Env env = setupProject(project, config);
-        DockerCompose.OngoingBuild.Tweak tweak = setupEnv(env, config);
-        DockerCompose.OngoingBuild.Finish finish = setupFinish(tweak, config);
+        DockerCompose.OngoingBuild.Finish finish = setupEnv(env, config);
         return finish.build();
     }
 
@@ -39,21 +38,13 @@ class DockerComposeFactory {
         }
     }
 
-    private DockerCompose.OngoingBuild.Tweak setupEnv(DockerCompose.OngoingBuild.Env env, Config config) {
+    private DockerCompose.OngoingBuild.Finish setupEnv(DockerCompose.OngoingBuild.Env env, Config config) {
         Map<String, String> configEnv = config.getEnv();
 
         if (configEnv != null) {
             return env.env(configEnv);
         } else {
             return env;
-        }
-    }
-
-    private DockerCompose.OngoingBuild.Finish setupFinish(DockerCompose.OngoingBuild.Tweak tweak, Config config) {
-        if (config.isClusterAlreadyUp()) {
-            return tweak.alreadyStarted();
-        } else {
-            return tweak;
         }
     }
 

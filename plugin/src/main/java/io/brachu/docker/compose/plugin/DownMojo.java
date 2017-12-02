@@ -10,10 +10,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 @Mojo(name = "down", defaultPhase = LifecyclePhase.POST_INTEGRATION_TEST)
 public class DownMojo extends AbstractDockerComposeMojo {
 
-    public DownMojo() {
-        super(true);
-    }
-
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         DockerCompose compose = dockerCompose();
@@ -22,11 +18,11 @@ public class DownMojo extends AbstractDockerComposeMojo {
         down(compose);
     }
 
-    private void down(DockerCompose compose) throws MojoFailureException, MojoExecutionException {
+    private void down(DockerCompose compose) throws MojoExecutionException {
         try {
             compose.down();
         } catch (JohannException ex) {
-            throw new MojoExecutionException("Unexpected error while shutting down docker-compose cluster", ex);
+            throw new MojoExecutionException("Docker-compose cluster shutdown failed.", ex);
         }
     }
 

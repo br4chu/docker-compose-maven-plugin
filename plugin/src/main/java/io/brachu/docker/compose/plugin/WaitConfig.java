@@ -8,7 +8,7 @@ class WaitConfig {
 
     private TimeUnit unit;
 
-    WaitConfig() {
+    public WaitConfig() {
         value = 1L;
         unit = TimeUnit.MINUTES;
     }

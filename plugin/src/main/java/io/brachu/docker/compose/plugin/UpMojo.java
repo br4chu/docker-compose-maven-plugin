@@ -10,10 +10,6 @@ import org.apache.maven.plugins.annotations.Mojo;
 @Mojo(name = "up", defaultPhase = LifecyclePhase.PRE_INTEGRATION_TEST)
 public class UpMojo extends AbstractDockerComposeMojo {
 
-    public UpMojo() {
-        super(false);
-    }
-
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         Config config = getConfig();
@@ -29,7 +25,7 @@ public class UpMojo extends AbstractDockerComposeMojo {
             compose.up();
             compose.waitForCluster(wait.getValue(), wait.getUnit());
         } catch (JohannException ex) {
-            throw new MojoExecutionException("Unexpected exception while starting docker-compose cluster", ex);
+            throw new MojoExecutionException("Docker-compose cluster failed to start.", ex);
         }
     }
 
