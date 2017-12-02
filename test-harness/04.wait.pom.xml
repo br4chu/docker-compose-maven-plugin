@@ -84,6 +84,12 @@
                 <groupId>io.brachu</groupId>
                 <artifactId>docker-compose-maven-plugin</artifactId>
                 <version>${docker-compose-plugin.version}</version>
+                <configuration>
+                    <wait>
+                        <value>2</value>
+                        <unit>SECONDS</unit>
+                    </wait>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
