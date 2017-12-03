@@ -43,6 +43,7 @@
         <assertj.version>3.8.0</assertj.version>
         <johann.version>0.2.0-SNAPSHOT</johann.version>
         <junit.version>4.12</junit.version>
+        <maven-invoker.version>3.0.0</maven-invoker.version>
 
         <!-- Plugins -->
         <failsafe-plugin.version>2.20.1</failsafe-plugin.version>
@@ -68,6 +69,12 @@
             <groupId>io.brachu</groupId>
             <artifactId>johann</artifactId>
             <version>${johann.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.maven.shared</groupId>
+            <artifactId>maven-invoker</artifactId>
+            <version>${maven-invoker.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -106,7 +113,7 @@
                 <version>${failsafe-plugin.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/DefaultsIT.java</include>
+                        <include>**/WaitIT.java</include>
                     </includes>
                     <excludes>
                         <exclude>**/Abstract*.java</exclude>
