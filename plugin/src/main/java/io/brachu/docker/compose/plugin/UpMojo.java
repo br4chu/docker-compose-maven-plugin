@@ -25,7 +25,7 @@ public class UpMojo extends AbstractDockerComposeMojo {
             compose.up();
             compose.waitForCluster(wait.getValue(), wait.getUnit());
         } catch (JohannException ex) {
-            throw new MojoExecutionException("Docker-compose cluster failed to start.", ex);
+            throw new MojoExecutionException("Docker-compose cluster failed to start", ex);
         }
     }
 

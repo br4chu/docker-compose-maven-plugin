@@ -42,7 +42,7 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
         try {
             return dockerComposeFactory.create(config);
         } catch (Exception ex) {
-            throw new MojoFailureException("Unexpected error while creating DockerCompose object", ex);
+            throw new MojoFailureException("Cannot build DockerCompose object", ex);
         }
     }
 

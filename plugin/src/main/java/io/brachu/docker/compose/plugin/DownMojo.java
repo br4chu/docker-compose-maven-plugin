@@ -22,7 +22,7 @@ public class DownMojo extends AbstractDockerComposeMojo {
         try {
             compose.down();
         } catch (JohannException ex) {
-            throw new MojoExecutionException("Docker-compose cluster shutdown failed.", ex);
+            throw new MojoExecutionException("Docker-compose cluster failed to shut down", ex);
         }
     }
 
