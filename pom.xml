@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.brachu</groupId>
+    <artifactId>docker-compose-maven-plugin-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>${project.groupId}:${project.artifactId}</name>
+    <description>Parent POM for docker-compose-maven-plugin and its testing harness.</description>
+    <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
+
+    <modules>
+        <module>plugin</module>
+        <module>test-harness/01.defaults.pom.xml</module>
+        <module>test-harness/02.specified-name.pom.xml</module>
+        <module>test-harness/03.env.pom.xml</module>
+        <module>test-harness/04.wait.pom.xml</module>
+    </modules>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <organization>
+        <name>Brachu</name>
+        <url>https://github.com/br4chu</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <name>Marcin Jaguś</name>
+            <email>marcin.jagus@protonmail.com</email>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
+
+        <connection>scm:git:git@github.com:br4chu/docker-compose-maven-plugin.git</connection>
+
+        <developerConnection>scm:git:git@github.com:br4chu/docker-compose-maven-plugin.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+</project>
+
