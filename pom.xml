@@ -41,14 +41,5 @@
         </developer>
     </developers>
 
-    <scm>
-        <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
-
-        <connection>scm:git:git@github.com:br4chu/docker-compose-maven-plugin.git</connection>
-
-        <developerConnection>scm:git:git@github.com:br4chu/docker-compose-maven-plugin.git</developerConnection>
-        <tag>HEAD</tag>
-    </scm>
-
 </project>
 
