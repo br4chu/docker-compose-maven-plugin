@@ -52,7 +52,7 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     private Map<String, String> env;
 
     /**
-     * Specifies how long should this plugin wait for all the containers within a cluster to be healthy or running (if they do not implement a health check).
+     * Specifies how long should this plugin wait for all containers within a cluster to be healthy or running (if they do not implement a health check).
      * Timeouts result in build failure.
      * <p>
      * Example that will wait 5 seconds:
@@ -63,6 +63,8 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
      *     &lt;/wait&gt;
      * </pre>
      * "unit" property accepts any value from TimeUnit enum that's greater than or equal to SECONDS.
+     * <p>
+     * By default plugin will wait 1 minute for cluster to be up and running.
      */
     @Parameter
     private WaitConfig wait;
