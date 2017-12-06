@@ -52,7 +52,7 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     private Map<String, String> env;
 
     /**
-     * Specifies how long should this plugin wait for all containers within a cluster to be healthy or running (if they do not implement a health check).
+     * Specifies how long should this plugin wait for all containers within a cluster to be healthy (or running if they do not implement a health check).
      * Timeouts result in build failure.
      * <p>
      * Example that will wait 5 seconds:

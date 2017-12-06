@@ -58,7 +58,7 @@ docker-compose-maven-plugin has following parameters:
 | executablePath | Path to docker-compose executable file. If left blank, it will be assumed that docker-compose is accessible from operating system's PATH. |
 | file | Path to docker-compose.yml file. If relative, it will be appended to Maven's "basedir". Default value is "src/test/resources/docker-compose.yml". |
 | projectName | Name of docker-compose project. It will be passed directly to docker-compose CLI. If not specified, a random 8-letter string will be used instead. |
-| wait | Specifies how long should this plugin wait for all containers within a cluster to be healthy or running (if they do not implement a health check). Timeouts result in build failure. By default plugin will wait 1 minute for cluster to be up and running. |
+| wait | Specifies how long should this plugin wait for all containers within a cluster to be healthy (or running if they do not implement a health check). Timeouts result in build failure. By default plugin will wait 1 minute for cluster to be up and running. |
 
 Parameters are added to plugin's `<configuration>` descriptor. For example:
 
