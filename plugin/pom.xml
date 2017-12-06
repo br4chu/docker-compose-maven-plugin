@@ -61,7 +61,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependencies -->
-        <johann.version>0.2.0-SNAPSHOT</johann.version>
+        <johann.version>0.2.0</johann.version>
         <jool.version>0.9.12</jool.version>
         <maven.version>3.5.2</maven.version>
         <maven-plugin-annotations.version>3.4</maven-plugin-annotations.version>
