@@ -28,8 +28,8 @@
 </build>
 ```
 
-3. Run your integration tests with `mvn verify` command and you should see your docker-compose cluser turning on before tests and shutting down after tests are
-done.
+3. Run your integration tests with `mvn verify` command. You should then see your docker-compose cluser turning on before tests and shutting down after tests
+are done.
 
 # Requirements
 
