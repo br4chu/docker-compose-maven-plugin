@@ -31,11 +31,25 @@ public class UpMojo extends AbstractDockerComposeMojo {
 
     private void fillProperties(DockerCompose compose) {
         fillProjectProperties(compose);
+        fillFailsafeArgLine(compose);
         fillSystemProperties(compose);
     }
 
     private void fillProjectProperties(DockerCompose compose) {
         project.getProperties().setProperty(PROJECT_NAME_PROPERTY, compose.getProjectName());
+    }
+
+    private void fillFailsafeArgLine(DockerCompose compose) {
+        String failsafeArgLine = project.getProperties().getProperty(FAILSAFE_ARGLINE_PROPERTY);
+        String argLineParam = constructFailsafeArgLine(compose);
+
+        if (failsafeArgLine != null) {
+            failsafeArgLine = argLineParam + " " + failsafeArgLine;
+        } else {
+            failsafeArgLine = argLineParam;
+        }
+
+        project.getProperties().setProperty(FAILSAFE_ARGLINE_PROPERTY, failsafeArgLine);
     }
 
     private void fillSystemProperties(DockerCompose compose) {

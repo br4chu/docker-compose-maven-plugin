@@ -11,6 +11,7 @@ import org.apache.maven.project.MavenProject;
 public abstract class AbstractDockerComposeMojo extends AbstractMojo {
 
     static final String PROJECT_NAME_PROPERTY = "maven.dockerCompose.project";
+    static final String FAILSAFE_ARGLINE_PROPERTY = "argLine";
 
     /**
      * Read-only property. Injects a MavenProject object into the plugin.
@@ -91,6 +92,10 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
         Config config = new Config(executablePath, basedir, file, projectName, env, wait);
         ConfigValidator.validate(config);
         return config;
+    }
+
+    String constructFailsafeArgLine(DockerCompose compose) {
+        return "-D" + PROJECT_NAME_PROPERTY + "=" + compose.getProjectName();
     }
 
 }
