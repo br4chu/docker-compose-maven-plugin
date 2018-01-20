@@ -1,3 +1,14 @@
+# 0.3.0
+
+Updated Johann dependency to version 0.5.0.
+
+Parametrize "down" goal with properties:
+* removeVolumes (defaults to `true`)
+* removeOrphans (default to `false`)
+* downTimeoutSeconds (defaults to 10)
+
+Refer to javadocs of DownMojo for more information.
+
 # 0.2.0
 
 Better integration with maven-failsafe-plugin. There is now no need to disable forking in maven-failsafe-plugin or proxying "maven.dockerCompose.project"

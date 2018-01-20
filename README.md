@@ -14,7 +14,7 @@
         <plugin>
             <groupId>io.brachu</groupId>
             <artifactId>docker-compose-maven-plugin</artifactId>
-            <version>0.2.0</version>
+            <version>0.3.0</version>
             <executions>
                 <execution>
                     <goals>
@@ -50,7 +50,7 @@ docker-compose-maven-plugin implements 2 goals:
 
 ## Parameters
 
-docker-compose-maven-plugin has following parameters:
+Both `up` and `down` goals have following parameters:
 
 | Parameter | Description |
 | --- | --- |
@@ -88,3 +88,13 @@ Parameters are added to plugin's `<configuration>` descriptor. For example:
     </executions>
 </plugin>
 ```
+
+## Parameters of `down` goal
+
+`down` goal can also be parametrized with following properties:
+
+| Parameter | Description | Default value |
+| --- | --- | --- |
+| removeVolumes | If set to `true`, removes named volumes declared in the `volumes` section of the Compose file and anonymous volumes attached to containers. | `true` |
+| removeOrphans | If set to `true`, removes containers for services not defined in the Compose file. | `false` |
+| downTimeoutSeconds | Specifies how long in seconds should docker-compose wait for cluster shutdown. | `10` |

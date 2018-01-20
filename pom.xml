@@ -6,7 +6,7 @@
 
     <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin-parent</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <packaging>pom</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -19,6 +19,7 @@
         <module>test-harness/02.specified-name.pom.xml</module>
         <module>test-harness/03.env.pom.xml</module>
         <module>test-harness/04.wait.pom.xml</module>
+        <module>test-harness/05.volumes.pom.xml</module>
     </modules>
 
     <licenses>

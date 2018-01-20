@@ -6,7 +6,7 @@
 
     <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin-test-harness-01</artifactId>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
     <description>Testing harness for docker-compose-maven-plugin.</description>
@@ -41,13 +41,13 @@
 
         <!-- Dependencies -->
         <assertj.version>3.8.0</assertj.version>
-        <johann.version>0.2.0</johann.version>
+        <johann.version>0.5.0</johann.version>
         <junit.version>4.12</junit.version>
         <maven-invoker.version>3.0.0</maven-invoker.version>
 
         <!-- Plugins -->
         <failsafe-plugin.version>2.20.1</failsafe-plugin.version>
-        <docker-compose-plugin.version>0.2.0</docker-compose-plugin.version>
+        <docker-compose-plugin.version>0.3.0</docker-compose-plugin.version>
     </properties>
 
     <dependencies>

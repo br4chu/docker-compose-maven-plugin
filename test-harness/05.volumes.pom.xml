@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.brachu</groupId>
-    <artifactId>docker-compose-maven-plugin-test-harness-04</artifactId>
+    <artifactId>docker-compose-maven-plugin-test-harness-05</artifactId>
     <version>0.3.0</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -92,10 +92,7 @@
                 <artifactId>docker-compose-maven-plugin</artifactId>
                 <version>${docker-compose-plugin.version}</version>
                 <configuration>
-                    <wait>
-                        <value>2</value>
-                        <unit>MINUTES</unit>
-                    </wait>
+                    <file>src/test/resources/05.docker-compose.yml</file>
                 </configuration>
                 <executions>
                     <execution>
@@ -113,11 +110,12 @@
                 <version>${failsafe-plugin.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/WaitIT.java</include>
+                        <include>**/VolumesIT.java</include>
                     </includes>
                     <excludes>
                         <exclude>**/Abstract*.java</exclude>
                     </excludes>
+                    <forkCount>0</forkCount>
                 </configuration>
                 <executions>
                     <execution>

@@ -1,0 +1,15 @@
+version: '2.1'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.7.2-alpine
+    volumes:
+      - "rabbitmq_logs:/var/log/rabbitmq"
+    healthcheck:
+      test: rabbitmqctl node_health_check
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+volumes:
+  rabbitmq_logs:
