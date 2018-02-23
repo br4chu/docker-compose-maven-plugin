@@ -31,6 +31,12 @@ public class DownMojo extends AbstractDockerComposeMojo {
     @Parameter(required = true, defaultValue = "10")
     private int downTimeoutSeconds;
 
+    /**
+     * Should 'down' goal kill all containers in the cluster before removing the cluster?
+     */
+    @Parameter(required = true, defaultValue = "true")
+    private boolean killBeforeDown;
+
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         DockerCompose compose = dockerCompose();
@@ -41,6 +47,9 @@ public class DownMojo extends AbstractDockerComposeMojo {
 
     private void down(DockerCompose compose) throws MojoExecutionException {
         try {
+            if (killBeforeDown) {
+                compose.kill();
+            }
             compose.down(config());
         } catch (JohannException ex) {
             throw new MojoExecutionException("Docker-compose cluster failed to shut down", ex);

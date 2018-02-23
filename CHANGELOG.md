@@ -1,8 +1,16 @@
+# 0.4.0
+
+Updated Johann dependency to version 0.7.0.
+
+Parametrized "down" goal with "killBeforeDown" property (defaults to `true`).
+
+Refer to javadocs of DownMojo for more information.
+
 # 0.3.0
 
 Updated Johann dependency to version 0.5.0.
 
-Parametrize "down" goal with properties:
+Parametrized "down" goal with properties:
 * removeVolumes (defaults to `true`)
 * removeOrphans (default to `false`)
 * downTimeoutSeconds (defaults to 10)
