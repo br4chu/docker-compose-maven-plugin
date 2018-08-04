@@ -14,7 +14,7 @@
         <plugin>
             <groupId>io.brachu</groupId>
             <artifactId>docker-compose-maven-plugin</artifactId>
-            <version>0.4.0</version>
+            <version>0.5.0</version>
             <executions>
                 <execution>
                     <goals>

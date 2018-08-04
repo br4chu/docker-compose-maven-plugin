@@ -6,7 +6,7 @@
 
     <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin</artifactId>
-    <version>0.4.0</version>
+    <version>0.5.0</version>
     <packaging>maven-plugin</packaging>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -53,7 +53,7 @@
 
     <properties>
         <checkstyle.rules.path>checkstyle.xml</checkstyle.rules.path>
-        <gpg.keyname>55B3E857</gpg.keyname>
+        <gpg.keyname>9A481873</gpg.keyname>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
@@ -61,23 +61,24 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
         <!-- Dependencies -->
-        <johann.version>0.7.0</johann.version>
+        <johann.version>0.8.0</johann.version>
         <jool.version>0.9.12</jool.version>
         <maven.version>3.5.2</maven.version>
         <maven-plugin-annotations.version>3.4</maven-plugin-annotations.version>
         <maven-plugin-api.version>3.0</maven-plugin-api.version>
 
         <!-- Plugins -->
-        <checkstyle-plugin.version>2.17</checkstyle-plugin.version>
+        <checkstyle-plugin.version>3.0.0</checkstyle-plugin.version>
+        <compiler-plugin.version>3.8.0</compiler-plugin.version>
         <deploy-plugin.version>2.8.2</deploy-plugin.version>
-        <findbugs-plugin.version>3.0.5</findbugs-plugin.version>
         <gpg-plugin.version>1.6</gpg-plugin.version>
         <jar-plugin.version>3.0.2</jar-plugin.version>
-        <javadoc-plugin.version>2.10.4</javadoc-plugin.version>
+        <javadoc-plugin.version>3.0.1</javadoc-plugin.version>
         <package-info-plugin.version>2.0.0</package-info-plugin.version>
         <release-plugin.version>2.5.3</release-plugin.version>
         <source-plugin.version>3.0.1</source-plugin.version>
-        <surefire-plugin.version>2.20</surefire-plugin.version>
+        <spotbugs-plugin.version>3.1.6</spotbugs-plugin.version>
+        <surefire-plugin.version>2.22.0</surefire-plugin.version>
     </properties>
 
     <profiles>
@@ -158,9 +159,9 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>findbugs-maven-plugin</artifactId>
-                <version>${findbugs-plugin.version}</version>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>${spotbugs-plugin.version}</version>
                 <configuration>
                     <effort>Max</effort>
                     <maxRank>20</maxRank>
@@ -217,7 +218,10 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.2</version>
+                <version>${compiler-plugin.version}</version>
+                <configuration>
+                    <parameters>true</parameters>
+                </configuration>
             </plugin>
 
             <plugin>
