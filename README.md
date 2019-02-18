@@ -98,3 +98,4 @@ Parameters are added to plugin's `<configuration>` descriptor. For example:
 | removeVolumes | If set to `true`, removes named volumes declared in the `volumes` section of the Compose file and anonymous volumes attached to containers. | `true` |
 | removeOrphans | If set to `true`, removes containers for services not defined in the Compose file. | `false` |
 | downTimeoutSeconds | Specifies how long in seconds should docker-compose wait for cluster shutdown. | `10` |
+| killBeforeDown | Should 'down' goal kill all containers in the cluster before removing the cluster? | `true` |
