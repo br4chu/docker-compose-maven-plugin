@@ -1,6 +1,7 @@
 # Introduction
 
-**docker-compose-maven-plugin** starts a docker-compose cluster before running project's integration tests and shuts it down after integration test are finished.
+**docker-compose-maven-plugin** starts a docker-compose cluster before running project's integration tests and shuts it down after integration tests are
+finished.
 
 # Getting started
 
@@ -14,7 +15,7 @@
         <plugin>
             <groupId>io.brachu</groupId>
             <artifactId>docker-compose-maven-plugin</artifactId>
-            <version>0.5.0</version>
+            <version>0.6.0</version>
             <executions>
                 <execution>
                     <goals>
@@ -28,17 +29,18 @@
 </build>
 ```
 
-3. Run your integration tests with `mvn verify` command. You should then see your docker-compose cluser turning on before tests and shutting down after tests
-are done.
+3. Run your integration tests with `mvn verify` command. You should then see your docker-compose cluster starting up before tests and shutting down after the
+tests are done.
 
 # Requirements
 
+* JDK8+
 * Maven 3+
 
 This project also depends on [Johann](https://github.com/br4chu/johann) library and inherits its requirements:
 
-* Docker Engine 1.12+ (because of health checks)
-* Docker Compose 1.14+ (because of `-f -` option)
+* Docker Engine 17.06+
+* Docker Compose 1.18+
 
 # Usage
 
@@ -52,13 +54,13 @@ docker-compose-maven-plugin implements 2 goals:
 
 Both `up` and `down` goals have following parameters:
 
-| Parameter | Description |
+| Parameter | Description | Default value |
 | --- | --- |
-| env | A map of environment variables that will be passed to docker-compose CLI. |
-| executablePath | Path to docker-compose executable file. If left blank, it will be assumed that docker-compose is accessible from operating system's PATH. |
-| file | Path to docker-compose.yml file. If relative, it will be appended to Maven's "basedir". Default value is "src/test/resources/docker-compose.yml". |
-| projectName | Name of docker-compose project. It will be passed directly to docker-compose CLI. If not specified, a random 8-letter string will be used instead. |
-| wait | Specifies how long should this plugin wait for all containers within a cluster to be healthy (or running if they do not implement a health check). Timeouts result in build failure. By default plugin will wait 1 minute for cluster to be up and running. |
+| env | A map of custom environment variables that will be passed to docker-compose CLI. | Empty map |
+| executablePath | Path to docker-compose executable file. If left blank, it will be assumed that docker-compose is accessible from operating system's PATH. | `""` |
+| file | Path to docker-compose.yml file. If relative, it will be appended to Maven's "basedir". | `"src/test/resources/docker-compose.yml"` |
+| projectName | Name of docker-compose project. It will be passed directly to docker-compose CLI. | Random 8-letter string |
+| wait | Specifies how long should this plugin wait for all containers within a cluster to be healthy (or running if they do not implement a health check). Timeouts result in build failure. | 1 minute |
 
 Parameters are added to plugin's `<configuration>` descriptor. For example:
 
@@ -66,7 +68,7 @@ Parameters are added to plugin's `<configuration>` descriptor. For example:
 <plugin>
     <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin</artifactId>
-    <version>0.1.0</version>
+    <version>0.6.0</version>
     <configuration>
         <projectName>myProject</projectName>
         <file>src/test/resources/custom.docker-compose.yml</file>

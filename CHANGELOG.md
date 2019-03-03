@@ -1,3 +1,7 @@
+# 0.6.0
+
+Updated Johann dependency to version 1.0.0.
+
 # 0.5.0
 
 Updated Johann dependency to version 0.8.0. This should result in better support of JDK9+ projects.
