@@ -55,7 +55,7 @@ docker-compose-maven-plugin implements 2 goals:
 Both `up` and `down` goals have following parameters:
 
 | Parameter | Description | Default value |
-| --- | --- |
+| --- | --- | --- |
 | env | A map of custom environment variables that will be passed to docker-compose CLI. | Empty map |
 | executablePath | Path to docker-compose executable file. If left blank, it will be assumed that docker-compose is accessible from operating system's PATH. | `""` |
 | file | Path to docker-compose.yml file. If relative, it will be appended to Maven's "basedir". | `"src/test/resources/docker-compose.yml"` |
