@@ -23,4 +23,8 @@ final class UpConfig {
         return wait;
     }
 
+    boolean shouldExecute() {
+        return commonConfig.shouldExecute();
+    }
+
 }

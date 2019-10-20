@@ -39,10 +39,14 @@ public final class DownMojo extends AbstractDockerComposeMojo {
 
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
-        DockerCompose compose = dockerCompose();
-
-        clearProperties(compose);
-        down(compose);
+        CommonConfig config = getCommonConfig();
+        if (config.shouldExecute()) {
+            DockerCompose compose = dockerCompose(config);
+            clearProperties(compose);
+            down(compose);
+        } else {
+            getLog().info("Skipping.");
+        }
     }
 
     private void down(DockerCompose compose) throws MojoExecutionException {

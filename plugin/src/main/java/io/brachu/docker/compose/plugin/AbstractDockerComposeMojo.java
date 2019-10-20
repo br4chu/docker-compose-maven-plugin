@@ -26,6 +26,12 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     private String basedir;
 
     /**
+     * Decides if current execution of this plugin will be skipped.
+     */
+    @Parameter(readonly = true, defaultValue = "false")
+    private boolean skip;
+
+    /**
      * Path to docker-compose executable file. If left blank, it will be assumed that docker-compose is accessible from operating system's PATH.
      */
     @Parameter
@@ -58,8 +64,8 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
         dockerComposeFactory = new DockerComposeFactory();
     }
 
-    DockerCompose dockerCompose() throws MojoFailureException {
-        return dockerCompose(getCommonConfig());
+    DockerCompose dockerCompose(UpConfig upConfig) throws MojoFailureException {
+        return dockerCompose(upConfig.getCommonConfig());
     }
 
     DockerCompose dockerCompose(CommonConfig config) throws MojoFailureException {
@@ -71,7 +77,7 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     }
 
     CommonConfig getCommonConfig() throws MojoFailureException {
-        CommonConfig config = new CommonConfig(executablePath, basedir, file, projectName, env);
+        CommonConfig config = new CommonConfig(executablePath, basedir, file, projectName, env, skip);
         CommonConfigValidator.validate(config);
         return config;
     }

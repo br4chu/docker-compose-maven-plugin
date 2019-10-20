@@ -20,6 +20,7 @@
         <module>test-harness/03.env.pom.xml</module>
         <module>test-harness/04.wait.pom.xml</module>
         <module>test-harness/05.volumes.pom.xml</module>
+        <module>test-harness/06.skip.pom.xml</module>
     </modules>
 
     <licenses>

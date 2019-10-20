@@ -18,11 +18,16 @@ final class CommonConfig {
 
     private final Map<String, String> env;
 
-    CommonConfig(@Nullable String executablePath, String projectBasedir, String file, @Nullable String projectName, @Nullable Map<String, String> env) {
+    private final boolean skip;
+
+    CommonConfig(@Nullable String executablePath, String projectBasedir, String file, @Nullable String projectName, @Nullable Map<String, String> env,
+                 boolean skip) {
+
         this.executablePath = StringUtils.trimToNull(executablePath);
         this.file = prepareFilePath(projectBasedir, file);
         this.projectName = StringUtils.trimToNull(projectName);
         this.env = env;
+        this.skip = skip;
     }
 
     String getExecutablePath() {
@@ -39,6 +44,10 @@ final class CommonConfig {
 
     Map<String, String> getEnv() {
         return env;
+    }
+
+    boolean shouldExecute() {
+        return !skip;
     }
 
     private String prepareFilePath(String projectBasedir, String file) {

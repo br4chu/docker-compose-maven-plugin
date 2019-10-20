@@ -1,3 +1,7 @@
+# 0.7.0 (in progress)
+
+Added "skip" property to all goals. Plugin executions can now be skipped based on conditional criteria provided by the end user.
+
 # 0.6.0
 
 Updated Johann dependency to version 1.0.0.
@@ -12,7 +16,7 @@ Updated Johann dependency to version 0.7.0.
 
 Parametrized "down" goal with "killBeforeDown" property (defaults to `true`).
 
-Refer to javadocs of DownMojo for more information.
+Refer to README or javadocs of DownMojo for more information.
 
 # 0.3.0
 
@@ -23,7 +27,7 @@ Parametrized "down" goal with properties:
 * removeOrphans (default to `false`)
 * downTimeoutSeconds (defaults to 10)
 
-Refer to javadocs of DownMojo for more information.
+Refer to README or javadocs of DownMojo for more information.
 
 # 0.2.0
 

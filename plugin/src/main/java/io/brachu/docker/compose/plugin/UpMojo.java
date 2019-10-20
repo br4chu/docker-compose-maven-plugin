@@ -32,10 +32,13 @@ public final class UpMojo extends AbstractDockerComposeMojo {
     @Override
     public void execute() throws MojoExecutionException, MojoFailureException {
         UpConfig config = getConfig();
-        DockerCompose compose = dockerCompose(config.getCommonConfig());
-
-        up(compose, config);
-        fillProperties(compose);
+        if (config.shouldExecute()) {
+            DockerCompose compose = dockerCompose(config);
+            up(compose, config);
+            fillProperties(compose);
+        } else {
+            getLog().info("Skipping.");
+        }
     }
 
     private UpConfig getConfig() throws MojoFailureException {
