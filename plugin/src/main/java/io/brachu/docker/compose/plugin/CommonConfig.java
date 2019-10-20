@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.StringUtils;
 
-class Config {
+final class CommonConfig {
 
     private final String executablePath;
 
@@ -18,16 +18,11 @@ class Config {
 
     private final Map<String, String> env;
 
-    private final WaitConfig wait;
-
-    Config(@Nullable String executablePath, String projectBasedir, String file, @Nullable String projectName, @Nullable Map<String, String> env,
-           @Nullable WaitConfig wait) {
-
+    CommonConfig(@Nullable String executablePath, String projectBasedir, String file, @Nullable String projectName, @Nullable Map<String, String> env) {
         this.executablePath = StringUtils.trimToNull(executablePath);
         this.file = prepareFilePath(projectBasedir, file);
         this.projectName = StringUtils.trimToNull(projectName);
         this.env = env;
-        this.wait = wait;
     }
 
     String getExecutablePath() {
@@ -44,14 +39,6 @@ class Config {
 
     Map<String, String> getEnv() {
         return env;
-    }
-
-    WaitConfig getWait() {
-        if (wait != null) {
-            return wait;
-        } else {
-            return new WaitConfig();
-        }
     }
 
     private String prepareFilePath(String projectBasedir, String file) {

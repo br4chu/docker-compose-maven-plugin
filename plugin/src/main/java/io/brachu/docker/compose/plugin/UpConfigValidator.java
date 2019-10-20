@@ -4,20 +4,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.maven.plugin.MojoFailureException;
 
-class ConfigValidator {
+final class UpConfigValidator {
 
-    static void validate(Config config) throws MojoFailureException {
-        validateFile(config);
+    static void validate(UpConfig config) throws MojoFailureException {
         validateWait(config);
     }
 
-    private static void validateFile(Config config) throws MojoFailureException {
-        if (config.getFile() == null) {
-            throw new MojoFailureException("Path to docker-compose.yml file must be set.");
-        }
-    }
-
-    private static void validateWait(Config config) throws MojoFailureException {
+    private static void validateWait(UpConfig config) throws MojoFailureException {
         WaitConfig wait = config.getWait();
         if (wait != null) {
             if (wait.getValue() < 1) {

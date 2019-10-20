@@ -2,7 +2,7 @@ package io.brachu.docker.compose.plugin;
 
 import java.util.concurrent.TimeUnit;
 
-public class WaitConfig {
+public final class WaitConfig {
 
     private long value;
 

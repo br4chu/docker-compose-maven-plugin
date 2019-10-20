@@ -4,9 +4,9 @@ import java.util.Map;
 
 import io.brachu.johann.DockerCompose;
 
-class DockerComposeFactory {
+final class DockerComposeFactory {
 
-    DockerCompose create(Config config) {
+    DockerCompose create(CommonConfig config) {
         DockerCompose.OngoingBuild.File file = setupBuilder(config);
         DockerCompose.OngoingBuild.Project project = setupFile(file, config);
         DockerCompose.OngoingBuild.Env env = setupProject(project, config);
@@ -14,7 +14,7 @@ class DockerComposeFactory {
         return finish.build();
     }
 
-    private DockerCompose.OngoingBuild.File setupBuilder(Config config) {
+    private DockerCompose.OngoingBuild.File setupBuilder(CommonConfig config) {
         String executablePath = config.getExecutablePath();
 
         if (executablePath != null) {
@@ -24,11 +24,11 @@ class DockerComposeFactory {
         }
     }
 
-    private DockerCompose.OngoingBuild.Project setupFile(DockerCompose.OngoingBuild.File file, Config config) {
+    private DockerCompose.OngoingBuild.Project setupFile(DockerCompose.OngoingBuild.File file, CommonConfig config) {
         return file.absolute(config.getFile());
     }
 
-    private DockerCompose.OngoingBuild.Env setupProject(DockerCompose.OngoingBuild.Project project, Config config) {
+    private DockerCompose.OngoingBuild.Env setupProject(DockerCompose.OngoingBuild.Project project, CommonConfig config) {
         String projectName = config.getProjectName();
 
         if (projectName != null) {
@@ -38,7 +38,7 @@ class DockerComposeFactory {
         }
     }
 
-    private DockerCompose.OngoingBuild.Finish setupEnv(DockerCompose.OngoingBuild.Env env, Config config) {
+    private DockerCompose.OngoingBuild.Finish setupEnv(DockerCompose.OngoingBuild.Env env, CommonConfig config) {
         Map<String, String> configEnv = config.getEnv();
 
         if (configEnv != null) {

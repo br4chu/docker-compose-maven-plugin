@@ -11,7 +11,7 @@ import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 
 @Mojo(name = "down", defaultPhase = LifecyclePhase.POST_INTEGRATION_TEST)
-public class DownMojo extends AbstractDockerComposeMojo {
+public final class DownMojo extends AbstractDockerComposeMojo {
 
     /**
      * Should 'down' goal remove named volumes declared in the `volumes` section of the Compose file and anonymous volumes attached to containers?

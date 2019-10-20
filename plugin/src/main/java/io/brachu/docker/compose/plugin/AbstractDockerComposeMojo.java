@@ -52,24 +52,6 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     @Parameter
     private Map<String, String> env;
 
-    /**
-     * Specifies how long should this plugin wait for all containers within a cluster to be healthy (or running if they do not implement a health check).
-     * Timeouts result in build failure.
-     * <p>
-     * Example that will wait 5 seconds:
-     * <pre>
-     *     &lt;wait&gt;
-     *         &lt;value&gt;5&lt;/value&gt;
-     *         &lt;unit&gt;SECONDS&lt;/unit&gt;
-     *     &lt;/wait&gt;
-     * </pre>
-     * "unit" property accepts any value from TimeUnit enum that's greater than or equal to SECONDS.
-     * <p>
-     * By default plugin will wait 1 minute for cluster to be up and running.
-     */
-    @Parameter
-    private WaitConfig wait;
-
     private DockerComposeFactory dockerComposeFactory;
 
     AbstractDockerComposeMojo() {
@@ -77,10 +59,10 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     }
 
     DockerCompose dockerCompose() throws MojoFailureException {
-        return dockerCompose(getConfig());
+        return dockerCompose(getCommonConfig());
     }
 
-    DockerCompose dockerCompose(Config config) throws MojoFailureException {
+    DockerCompose dockerCompose(CommonConfig config) throws MojoFailureException {
         try {
             return dockerComposeFactory.create(config);
         } catch (Exception ex) {
@@ -88,9 +70,9 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
         }
     }
 
-    Config getConfig() throws MojoFailureException {
-        Config config = new Config(executablePath, basedir, file, projectName, env, wait);
-        ConfigValidator.validate(config);
+    CommonConfig getCommonConfig() throws MojoFailureException {
+        CommonConfig config = new CommonConfig(executablePath, basedir, file, projectName, env);
+        CommonConfigValidator.validate(config);
         return config;
     }
 
