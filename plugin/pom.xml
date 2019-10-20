@@ -66,18 +66,18 @@
         <maven.version>3.6.0</maven.version>
 
         <!-- Plugins -->
-        <checkstyle-plugin.version>3.0.0</checkstyle-plugin.version>
-        <compiler-plugin.version>3.8.0</compiler-plugin.version>
+        <checkstyle-plugin.version>3.1.0</checkstyle-plugin.version>
+        <compiler-plugin.version>3.8.1</compiler-plugin.version>
         <deploy-plugin.version>2.8.2</deploy-plugin.version>
         <gpg-plugin.version>1.6</gpg-plugin.version>
-        <jar-plugin.version>3.1.1</jar-plugin.version>
-        <javadoc-plugin.version>3.0.1</javadoc-plugin.version>
+        <jar-plugin.version>3.1.2</jar-plugin.version>
+        <javadoc-plugin.version>3.1.1</javadoc-plugin.version>
         <maven-plugin.version>3.6.0</maven-plugin.version>
         <package-info-plugin.version>2.0.0</package-info-plugin.version>
         <release-plugin.version>2.5.3</release-plugin.version>
-        <source-plugin.version>3.0.1</source-plugin.version>
-        <spotbugs-plugin.version>3.1.11</spotbugs-plugin.version>
-        <surefire-plugin.version>2.22.1</surefire-plugin.version>
+        <source-plugin.version>3.1.0</source-plugin.version>
+        <spotbugs-plugin.version>3.1.12.2</spotbugs-plugin.version>
+        <surefire-plugin.version>2.22.2</surefire-plugin.version>
     </properties>
 
     <profiles>
