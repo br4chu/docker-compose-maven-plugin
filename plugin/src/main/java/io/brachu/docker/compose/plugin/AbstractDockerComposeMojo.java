@@ -26,9 +26,9 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     private String basedir;
 
     /**
-     * Decides if current execution of this plugin will be skipped.
+     * Decides if current execution of this plugin should be skipped.
      */
-    @Parameter(readonly = true, defaultValue = "false")
+    @Parameter(property = "maven.dockerCompose.skip", defaultValue = "false")
     private boolean skip;
 
     /**
