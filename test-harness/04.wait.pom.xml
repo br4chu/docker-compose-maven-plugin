@@ -41,7 +41,7 @@
 
         <!-- Dependencies -->
         <assertj.version>3.13.2</assertj.version>
-        <johann.version>1.0.0</johann.version>
+        <johann.version>1.0.1</johann.version>
         <junit.version>4.12</junit.version>
         <maven-invoker.version>3.0.1</maven-invoker.version>
 
@@ -113,6 +113,9 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${failsafe-plugin.version}</version>
                 <configuration>
+                    <systemPropertyVariables>
+                        <maven.home>${maven.home}</maven.home>
+                    </systemPropertyVariables>
                     <includes>
                         <include>**/WaitIT.java</include>
                     </includes>

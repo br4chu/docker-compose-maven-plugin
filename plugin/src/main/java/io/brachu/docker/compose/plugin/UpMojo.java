@@ -2,6 +2,7 @@ package io.brachu.docker.compose.plugin;
 
 import io.brachu.johann.DockerCompose;
 import io.brachu.johann.exception.JohannException;
+import io.brachu.johann.exception.JohannTimeoutException;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
@@ -51,6 +52,10 @@ public final class UpMojo extends AbstractDockerComposeMojo {
         try {
             compose.up();
             compose.waitForCluster(wait.getValue(), wait.getUnit());
+        } catch (JohannTimeoutException ex) {
+            throw new MojoExecutionException("Timed out while waiting for cluster to be healthy."
+                    + " Either at least one of containers in the cluster failed to start properly or the value of 'wait' property is too short."
+                    + " Current 'wait' property value is " + ex.getTime() + " " + ex.getUnit() + ".");
         } catch (JohannException ex) {
             throw new MojoExecutionException("Docker-compose cluster failed to start", ex);
         }
