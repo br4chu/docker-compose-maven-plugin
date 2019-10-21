@@ -118,7 +118,7 @@ Properties are added to plugin's `<configuration>` descriptor. For example:
 <plugin>
     <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin</artifactId>
-    <version>0.6.0</version>
+    <version>0.7.0</version>
     <configuration>
         <projectName>myProject</projectName>
         <file>src/test/resources/custom.docker-compose.yml</file>
