@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.brachu</groupId>
-    <artifactId>docker-compose-maven-plugin-test-harness-02</artifactId>
+    <artifactId>docker-compose-maven-plugin-test-harness-06</artifactId>
     <version>0.6.1-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -93,12 +93,42 @@
                 <artifactId>docker-compose-maven-plugin</artifactId>
                 <version>${docker-compose-plugin.version}</version>
                 <configuration>
-                    <projectName>specifiedName</projectName>
+                    <file>src/test/resources/07.docker-compose.yml</file>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>up</id>
                         <goals>
                             <goal>up</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>stop</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>stop</goal>
+                        </goals>
+                        <configuration>
+                            <stopServices>
+                                <service>postgresql</service>
+                            </stopServices>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>start</id>
+                        <phase>pre-integration-test</phase>
+                        <goals>
+                            <goal>start</goal>
+                        </goals>
+                        <configuration>
+                            <startServices>
+                                <service>postgresql</service>
+                            </startServices>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>down</id>
+                        <goals>
                             <goal>down</goal>
                         </goals>
                     </execution>
@@ -111,7 +141,7 @@
                 <version>${failsafe-plugin.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/SpecifiedNameIT.java</include>
+                        <include>**/StopStartIT.java</include>
                     </includes>
                     <excludes>
                         <exclude>**/Abstract*.java</exclude>

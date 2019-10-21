@@ -7,6 +7,12 @@ Added "skip" property to all goals. Plugin executions can now be skipped based o
 Improved error message when a timeout occurs. Previous message printed entire stacktrace of an exception which confused users into thinking it may be a bug in
 the plugin which was usually not the case.
 
+Added new Maven goals:
+* start (bound to pre-integration-test phase by default)
+* stop (bound to post-integration-test phase by default)
+
+Both new goals are equivalent to "start" and "stop" commands that can be passed to docker-compose CLI.
+
 # 0.6.0
 
 Updated Johann dependency to version 1.0.0.

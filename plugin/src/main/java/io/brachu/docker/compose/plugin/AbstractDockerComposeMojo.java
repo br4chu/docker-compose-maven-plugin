@@ -3,6 +3,7 @@ package io.brachu.docker.compose.plugin;
 import java.util.Map;
 
 import io.brachu.johann.DockerCompose;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoFailureException;
 import org.apache.maven.plugins.annotations.Parameter;
@@ -10,8 +11,8 @@ import org.apache.maven.project.MavenProject;
 
 public abstract class AbstractDockerComposeMojo extends AbstractMojo {
 
-    static final String PROJECT_NAME_PROPERTY = "maven.dockerCompose.project";
-    static final String FAILSAFE_ARGLINE_PROPERTY = "argLine";
+    private static final String PROJECT_NAME_PROPERTY = "maven.dockerCompose.project";
+    private static final String FAILSAFE_ARGLINE_PROPERTY = "argLine";
 
     /**
      * Read-only property. Injects a MavenProject object into the plugin.
@@ -58,17 +59,31 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     @Parameter
     private Map<String, String> env;
 
+    /**
+     * Specifies how long should this plugin wait for all containers within a cluster to be healthy (or running if they do not implement a health check).
+     * Timeouts result in build failure.
+     * <p>
+     * Example that will wait 5 seconds:
+     * <pre>
+     *     &lt;wait&gt;
+     *         &lt;value&gt;5&lt;/value&gt;
+     *         &lt;unit&gt;SECONDS&lt;/unit&gt;
+     *     &lt;/wait&gt;
+     * </pre>
+     * "unit" property accepts any value from <code>java.util.concurrent.TimeUnit</code> enum that's greater than or equal to SECONDS.
+     * <p>
+     * By default plugin will wait 1 minute for cluster to be up and running.
+     */
+    @Parameter
+    private WaitConfig wait;
+
     private DockerComposeFactory dockerComposeFactory;
 
     AbstractDockerComposeMojo() {
         dockerComposeFactory = new DockerComposeFactory();
     }
 
-    DockerCompose dockerCompose(UpConfig upConfig) throws MojoFailureException {
-        return dockerCompose(upConfig.getCommonConfig());
-    }
-
-    DockerCompose dockerCompose(CommonConfig config) throws MojoFailureException {
+    DockerCompose dockerCompose(Config config) throws MojoFailureException {
         try {
             return dockerComposeFactory.create(config);
         } catch (Exception ex) {
@@ -76,14 +91,67 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
         }
     }
 
-    CommonConfig getCommonConfig() throws MojoFailureException {
-        CommonConfig config = new CommonConfig(executablePath, basedir, file, projectName, env, skip);
-        CommonConfigValidator.validate(config);
+    Config getConfig() throws MojoFailureException {
+        Config config = new Config(executablePath, basedir, file, projectName, env, wait, skip);
+        ConfigValidator.validate(config);
         return config;
     }
 
-    String constructFailsafeArgLine(DockerCompose compose) {
+    void fillProperties(DockerCompose compose) {
+        fillProjectProperties(compose);
+        fillFailsafeArgLine(compose);
+        fillSystemProperties(compose);
+    }
+
+    void clearProperties(DockerCompose compose) {
+        clearProjectProperties();
+        clearFailsafeArgLine(compose);
+        clearSystemProperties();
+    }
+
+    private void fillProjectProperties(DockerCompose compose) {
+        project.getProperties().setProperty(PROJECT_NAME_PROPERTY, compose.getProjectName());
+    }
+
+    private void clearProjectProperties() {
+        project.getProperties().remove(PROJECT_NAME_PROPERTY);
+    }
+
+    private void fillFailsafeArgLine(DockerCompose compose) {
+        String failsafeArgLine = project.getProperties().getProperty(FAILSAFE_ARGLINE_PROPERTY);
+        String argLineParam = constructFailsafeArgLine(compose);
+
+        if (failsafeArgLine != null && !failsafeArgLine.contains(argLineParam)) {
+            failsafeArgLine = argLineParam + " " + failsafeArgLine;
+        } else {
+            failsafeArgLine = argLineParam;
+        }
+
+        project.getProperties().setProperty(FAILSAFE_ARGLINE_PROPERTY, failsafeArgLine);
+    }
+
+    private void clearFailsafeArgLine(DockerCompose compose) {
+        String failsafeArgLine = project.getProperties().getProperty(FAILSAFE_ARGLINE_PROPERTY);
+        if (failsafeArgLine != null) {
+            failsafeArgLine = StringUtils.trimToNull(failsafeArgLine.replace(constructFailsafeArgLine(compose), ""));
+            if (failsafeArgLine != null) {
+                project.getProperties().setProperty(FAILSAFE_ARGLINE_PROPERTY, failsafeArgLine);
+            } else {
+                project.getProperties().remove(FAILSAFE_ARGLINE_PROPERTY);
+            }
+        }
+    }
+
+    private String constructFailsafeArgLine(DockerCompose compose) {
         return "-D" + PROJECT_NAME_PROPERTY + "=" + compose.getProjectName();
+    }
+
+    private void fillSystemProperties(DockerCompose compose) {
+        System.setProperty(PROJECT_NAME_PROPERTY, compose.getProjectName());
+    }
+
+    private void clearSystemProperties() {
+        System.clearProperty(PROJECT_NAME_PROPERTY);
     }
 
 }
