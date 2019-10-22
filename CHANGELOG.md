@@ -1,6 +1,6 @@
 # 0.7.0
 
-Updated Johann dependency to version 1.0.1.
+Updated Johann dependency to version 1.1.0.
 
 Added "skip" property to all goals. Plugin executions can now be skipped based on conditional criteria provided by the end user.
 Users can also provide `dockerCompose.skip` Maven property to skip all plugin executions at once.
