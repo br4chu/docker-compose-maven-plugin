@@ -110,7 +110,7 @@ All goals have following properties:
 | file | Path to docker-compose.yml file. If relative, it will be appended to Maven's "basedir". | `"src/test/resources/docker-compose.yml"` |
 | projectName | Name of docker-compose project. It will be passed directly to docker-compose CLI. | Random 8-letter string |
 | wait | Specifies how long should this plugin wait for a cluster/service to be healthy (or running if they do not implement a health check). Timeouts result in a build failure. This property is used only by "up" and "start" goals. | 1 minute |
-| skip | Decides if an execution of a goal should be skipped entirely. Be advised that skipping execution of an `up` goal without skipping execution of a `down` goal may result in an unexpected behaviour if a `projectName` property is not provided explicitly. | `false` |
+| skip | Decides if an execution of a goal should be skipped entirely. You can also set `dockerCompose.skip` Maven property to `true` to achieve similar effect. Be advised that skipping execution of an `up` goal without skipping execution of a `down` goal may result in an unexpected behaviour if a `projectName` property is not provided explicitly. | `false` |
 
 Properties are added to plugin's `<configuration>` descriptor. For example:
 
