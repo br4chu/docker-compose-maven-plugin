@@ -1,4 +1,4 @@
-# 0.7.0 (in progress)
+# 0.7.0
 
 Updated Johann dependency to version 1.0.1.
 
