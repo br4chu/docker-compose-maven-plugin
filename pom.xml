@@ -21,6 +21,9 @@
         <module>test-harness/04.wait.pom.xml</module>
         <module>test-harness/05.volumes.pom.xml</module>
         <module>test-harness/06.skip.pom.xml</module>
+        <module>test-harness/07.skip-property.pom.xml</module>
+        <module>test-harness/08.stop.pom.xml</module>
+        <module>test-harness/09.stop-start.pom.xml</module>
     </modules>
 
     <licenses>

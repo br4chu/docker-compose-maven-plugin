@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.brachu</groupId>
-    <artifactId>docker-compose-maven-plugin-test-harness-06</artifactId>
+    <artifactId>docker-compose-maven-plugin-test-harness-09</artifactId>
     <version>0.7.0-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -93,7 +93,7 @@
                 <artifactId>docker-compose-maven-plugin</artifactId>
                 <version>${docker-compose-plugin.version}</version>
                 <configuration>
-                    <file>src/test/resources/07.docker-compose.yml</file>
+                    <file>src/test/resources/08.docker-compose.yml</file>
                 </configuration>
                 <executions>
                     <execution>
