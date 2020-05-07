@@ -1,3 +1,9 @@
+# 0.8.0
+
+Updated Johann dependency to version 1.2.0.
+
+Added "workDir" property to all goals. See README.md for more information about it.
+
 # 0.7.0
 
 Updated Johann dependency to version 1.1.0.
@@ -5,8 +11,8 @@ Updated Johann dependency to version 1.1.0.
 Added "skip" property to all goals. Plugin executions can now be skipped based on conditional criteria provided by the end user.
 Users can also provide `dockerCompose.skip` Maven property to skip all plugin executions at once.
 
-Improved error message when a timeout occurs. Previous message printed entire stacktrace of an exception which confused users into thinking it may be a bug in
-the plugin which was usually not the case.
+Improved error message when a timeout occurs. Previous message printed entire stacktrace of an exception which confused users into thinking it may be
+a bug in the plugin which was usually not the case.
 
 Added new Maven goals:
 * start (bound to pre-integration-test phase by default)
