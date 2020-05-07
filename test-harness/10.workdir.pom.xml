@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.brachu</groupId>
-    <artifactId>docker-compose-maven-plugin-test-harness-09</artifactId>
+    <artifactId>docker-compose-maven-plugin-test-harness-10</artifactId>
     <version>0.8.0-SNAPSHOT</version>
 
     <name>${project.groupId}:${project.artifactId}</name>
@@ -93,42 +93,13 @@
                 <artifactId>docker-compose-maven-plugin</artifactId>
                 <version>${docker-compose-plugin.version}</version>
                 <configuration>
-                    <file>src/test/resources/08.docker-compose.yml</file>
+                    <file>src/test/resources/10.docker-compose.yml</file>
+                    <workDir>src/test/resources</workDir>
                 </configuration>
                 <executions>
                     <execution>
-                        <id>up</id>
                         <goals>
                             <goal>up</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>stop</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>stop</goal>
-                        </goals>
-                        <configuration>
-                            <stopServices>
-                                <service>postgresql</service>
-                            </stopServices>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>start</id>
-                        <phase>pre-integration-test</phase>
-                        <goals>
-                            <goal>start</goal>
-                        </goals>
-                        <configuration>
-                            <startServices>
-                                <service>postgresql</service>
-                            </startServices>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>down</id>
-                        <goals>
                             <goal>down</goal>
                         </goals>
                     </execution>
@@ -140,8 +111,11 @@
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>${failsafe-plugin.version}</version>
                 <configuration>
+                    <systemPropertyVariables>
+                        <maven.home>${maven.home}</maven.home>
+                    </systemPropertyVariables>
                     <includes>
-                        <include>**/StopStartIT.java</include>
+                        <include>**/WorkDirIT.java</include>
                     </includes>
                     <excludes>
                         <exclude>**/Abstract*.java</exclude>

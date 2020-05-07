@@ -1,0 +1,7 @@
+version: '2.1'
+
+services:
+  postgresql:
+    extends:
+      file: services/postgresql.yml
+      service: postgresql

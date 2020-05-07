@@ -38,7 +38,7 @@ docker-compose-maven-plugin currently implements 4 goals:
         <plugin>
             <groupId>io.brachu</groupId>
             <artifactId>docker-compose-maven-plugin</artifactId>
-            <version>0.7.0</version>
+            <version>0.8.0</version>
             <executions>
                 <execution>
                     <goals>
@@ -74,7 +74,7 @@ Below is an example configuration which starts and stops `postgresql` and `rabbi
         <plugin>
             <groupId>io.brachu</groupId>
             <artifactId>docker-compose-maven-plugin</artifactId>
-            <version>0.7.0</version>
+            <version>0.8.0</version>
             <executions>
                 <execution>
                     <goals>
@@ -107,7 +107,8 @@ All goals have following properties:
 | --- | --- | --- |
 | env | A map of custom environment variables that will be passed to docker-compose CLI. | Empty map |
 | executablePath | Path to docker-compose executable file. If left blank, it will be assumed that docker-compose is accessible from operating system's PATH. | `""` |
-| file | Path to docker-compose.yml file. If relative, it will be appended to Maven's "basedir". | `"src/test/resources/docker-compose.yml"` |
+| workDir | Path to a directory that will be set as a working directory of docker-compose process. All relative paths defined in docker-compose.yml file will be resolved against this directory. If set to relative path, it will be resolved against "${project.basedir}". If set to blank, working directory will be the same as working directory of JVM process that started this plugin which is usually a directory from which Maven was run. | `${project.basedir}` |
+| file | Path to docker-compose.yml file. If relative, it will be appended to Maven's "project.basedir". | `"src/test/resources/docker-compose.yml"` |
 | projectName | Name of docker-compose project. It will be passed directly to docker-compose CLI. | Random 8-letter string |
 | wait | Specifies how long should this plugin wait for a cluster/service to be healthy (or running if they do not implement a health check). Timeouts result in a build failure. This property is used only by "up" and "start" goals. | 1 minute |
 | skip | Decides if an execution of a goal should be skipped entirely. You can also set `dockerCompose.skip` Maven property to `true` to achieve similar effect. Be advised that skipping execution of an `up` goal without skipping execution of a `down` goal may result in an unexpected behaviour if a `projectName` property is not provided explicitly. | `false` |
@@ -118,7 +119,7 @@ Properties are added to plugin's `<configuration>` descriptor. For example:
 <plugin>
     <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin</artifactId>
-    <version>0.7.0</version>
+    <version>0.8.0</version>
     <configuration>
         <projectName>myProject</projectName>
         <file>src/test/resources/custom.docker-compose.yml</file>

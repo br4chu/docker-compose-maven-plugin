@@ -1,5 +1,6 @@
 package io.brachu.docker.compose.plugin;
 
+import java.io.File;
 import java.util.Map;
 
 import io.brachu.johann.DockerCompose;
@@ -21,10 +22,10 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     protected MavenProject project;
 
     /**
-     * Read-only property. Injects Maven's "basedir" property into the plugin.
+     * Read-only property. Injects Maven's "project.basedir" property into the plugin.
      */
-    @Parameter(required = true, readonly = true, defaultValue = "${basedir}")
-    private String basedir;
+    @Parameter(required = true, readonly = true, defaultValue = "${project.basedir}")
+    private File basedir;
 
     /**
      * Decides if current execution of this plugin should be skipped.
@@ -39,7 +40,17 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     private String executablePath;
 
     /**
-     * Path to docker-compose.yml file. If relative, it will be appended to Maven's "basedir". Default value is "src/test/resources/docker-compose.yml".
+     * Path to a directory that will be set as a working directory of docker-compose process. All relative paths defined in docker-compose.yml
+     * file will be resolved against this directory. If set to relative path, it will be resolved against "${project.basedir}". If set to blank,
+     * working directory will be the same as working directory of JVM process that started this plugin which is a directory from which Maven was run
+     * in most cases. Default value is "${project.basedir}".
+     */
+    @Parameter(defaultValue = "${project.basedir}")
+    private File workDir;
+
+    /**
+     * Path to docker-compose.yml file. If relative, it will be appended to Maven's "project.basedir". Default value is
+     * "src/test/resources/docker-compose.yml".
      */
     @Parameter(required = true, defaultValue = "src/test/resources/docker-compose.yml")
     private String file;
@@ -92,7 +103,7 @@ public abstract class AbstractDockerComposeMojo extends AbstractMojo {
     }
 
     Config getConfig() throws MojoFailureException {
-        Config config = new Config(executablePath, basedir, file, projectName, env, wait, skip);
+        Config config = new Config(executablePath, workDir, basedir, file, projectName, env, wait, skip);
         ConfigValidator.validate(config);
         return config;
     }

@@ -1,0 +1,14 @@
+version: '2.1'
+
+services:
+  postgresql:
+    image: postgres:9.6-alpine
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: test
+    healthcheck:
+      test: pg_isready -q -h localhost
+      interval: 2s
+      timeout: 2s
+      retries: 15

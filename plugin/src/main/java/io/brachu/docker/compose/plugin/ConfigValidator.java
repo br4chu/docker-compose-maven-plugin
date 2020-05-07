@@ -1,5 +1,6 @@
 package io.brachu.docker.compose.plugin;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.maven.plugin.MojoFailureException;
@@ -7,8 +8,16 @@ import org.apache.maven.plugin.MojoFailureException;
 final class ConfigValidator {
 
     static void validate(Config config) throws MojoFailureException {
+        validateWorkDir(config);
         validateFile(config);
         validateWait(config);
+    }
+
+    private static void validateWorkDir(Config config) throws MojoFailureException {
+        File workDir = config.getWorkDir();
+        if (workDir != null && !workDir.isDirectory()) {
+            throw new MojoFailureException("Provided path for working directory '" + workDir + "' does not point to an existing directory.");
+        }
     }
 
     private static void validateFile(Config config) throws MojoFailureException {
