@@ -143,6 +143,14 @@ Properties are added to plugin's `<configuration>` descriptor. For example:
 </plugin>
 ```
 
+## Properties of `up` goal
+
+`up` goal can also be parametrized with following properties:
+
+| Property | Description | Default value |
+| --- | --- | --- |
+| followLogs | Boolean flag that triggers the reading of docker-compose logs. The effect of setting this parameter to `true` would be the same as running `docker-compose logs -f` command in a different terminal window after this goal finishes executing, but logs will instead be redirected to `System.out` (for standard output) and `System.err` (for standard error) of JVM process that runs this goal. | `false` |
+
 ## Properties of `down` goal
 
 `down` goal can also be parametrized with following properties:

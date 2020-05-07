@@ -4,6 +4,8 @@ Updated Johann dependency to version 1.2.0.
 
 Added "workDir" property to all goals. See README.md for more information about it.
 
+Added "followLogs" property to `up` goal. See README.md for more information about it.
+
 # 0.7.0
 
 Updated Johann dependency to version 1.1.0.

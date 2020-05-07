@@ -25,6 +25,7 @@
         <module>test-harness/08.stop.pom.xml</module>
         <module>test-harness/09.stop-start.pom.xml</module>
         <module>test-harness/10.workdir.pom.xml</module>
+        <module>test-harness/11.followlogs.pom.xml</module>
     </modules>
 
     <licenses>
