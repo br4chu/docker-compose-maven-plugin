@@ -1,3 +1,9 @@
+# 0.9.0
+
+Updated Johann dependency to version 1.3.0.
+
+Added "forceBuild" property to `up` goal. See README.md for more information about it.
+
 # 0.8.0
 
 Updated Johann dependency to version 1.2.0.

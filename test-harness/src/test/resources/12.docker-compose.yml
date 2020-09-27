@@ -1,0 +1,12 @@
+version: '2.1'
+
+services:
+  http-server:
+    image: br4chu/http-server:3.8.6
+    build:
+      context: ./build/http-server
+    healthcheck:
+      test: curl -sf http://127.0.0.1:7000 || exit 1
+      interval: 2s
+      timeout: 2s
+      retries: 15

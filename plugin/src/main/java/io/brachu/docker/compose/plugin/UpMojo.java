@@ -1,6 +1,7 @@
 package io.brachu.docker.compose.plugin;
 
 import io.brachu.johann.DockerCompose;
+import io.brachu.johann.UpConfig;
 import io.brachu.johann.exception.JohannException;
 import io.brachu.johann.exception.JohannTimeoutException;
 import org.apache.maven.plugin.MojoExecutionException;
@@ -13,11 +14,18 @@ import org.apache.maven.plugins.annotations.Parameter;
 public final class UpMojo extends AbstractDockerComposeMojo {
 
     /**
-     * Boolean flag that triggers the reading of docker-compose logs. The effect of setting this parameter to "true" would be the same as running
-     * "docker-compose logs -f" command in a different terminal window after this goal finishes executing, but logs will instead be redirected to
-     * System.out (for standard output) and System.err (for standard error) of JVM process that runs this goal.
+     * Forces docker-compose to build images for all services that have their "build:" section supplied in docker-compose.yml. Build will be invoked
+     * even if an image already exists. This is equivalent of passing "--build" switch to docker-compose CLI.
      */
-    @Parameter
+    @Parameter(required = true, defaultValue = "false")
+    private boolean forceBuild;
+
+    /**
+     * Boolean flag that triggers the reading of docker-compose logs. The effect of setting this parameter to "true" would be the same as running
+     * "docker-compose logs -f" command in a different terminal window after this goal finishes executing. Logs will be redirected to System.out
+     * (for standard output) and System.err (for standard error) of JVM process that runs this goal.
+     */
+    @Parameter(required = true, defaultValue = "false")
     private boolean followLogs;
 
     @Override
@@ -35,7 +43,7 @@ public final class UpMojo extends AbstractDockerComposeMojo {
     private void up(DockerCompose compose, Config config) throws MojoExecutionException {
         WaitConfig wait = config.getWait();
         try {
-            compose.up();
+            compose.up(config());
             if (followLogs) {
                 compose.followLogs();
             }
@@ -45,6 +53,11 @@ public final class UpMojo extends AbstractDockerComposeMojo {
         } catch (JohannException ex) {
             throw new MojoExecutionException("Docker-compose cluster failed to start", ex);
         }
+    }
+
+    private UpConfig config() {
+        return UpConfig.defaults()
+                .withForceBuild(forceBuild);
     }
 
 }
