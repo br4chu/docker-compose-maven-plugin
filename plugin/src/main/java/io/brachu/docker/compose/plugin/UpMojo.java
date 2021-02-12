@@ -22,7 +22,7 @@ public final class UpMojo extends AbstractDockerComposeMojo {
 
     /**
      * Boolean flag that triggers the reading of docker-compose logs. The effect of setting this parameter to "true" would be the same as running
-     * "docker-compose logs -f" command in a different terminal window after this goal finishes executing. Logs will be redirected to System.out
+     * "docker-compose logs -f" command in a different terminal window after this goal has finished executing. Logs will be redirected to System.out
      * (for standard output) and System.err (for standard error) of JVM process that runs this goal.
      */
     @Parameter(required = true, defaultValue = "false")
