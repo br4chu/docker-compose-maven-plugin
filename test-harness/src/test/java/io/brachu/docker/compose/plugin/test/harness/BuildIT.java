@@ -28,7 +28,7 @@ public class BuildIT {
         invoker.execute(request);
 
         String output = buffer.toString();
-        assertThat(output).contains("Successfully built");
+        assertThat(output).contains("BUILD SUCCESS");
     }
 
 }

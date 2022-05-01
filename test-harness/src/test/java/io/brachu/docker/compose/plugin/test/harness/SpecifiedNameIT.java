@@ -9,7 +9,7 @@ public class SpecifiedNameIT {
 
     @Test
     public void shouldHaveSystemProperty() {
-        assertThat(System.getProperty("maven.dockerCompose.project")).isEqualTo("specifiedName");
+        assertThat(System.getProperty("maven.dockerCompose.project")).isEqualTo("specifiedname");
     }
 
     @Test

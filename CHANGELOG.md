@@ -1,3 +1,7 @@
+# 0.10.0
+
+Update Johann dependency to version 1.4.0. This should fix any potential issues when running against Docker Compose v2.x.
+
 # 0.9.0
 
 Updated Johann dependency to version 1.3.0.
