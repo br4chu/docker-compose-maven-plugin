@@ -9,8 +9,8 @@
     <version>0.10.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>Parent POM for docker-compose-maven-plugin and its testing harness.</description>
+    <name>Docker Compose Maven Plugin Parent</name>
+    <description>Parent POM for docker-compose-maven-plugin and its testing harness</description>
     <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
 
     <modules>
@@ -48,6 +48,13 @@
             <email>marcin.jagus@protonmail.com</email>
         </developer>
     </developers>
+
+    <scm>
+        <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
+        <connection>scm:git:git@github.com:br4chu/docker-compose-maven-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:br4chu/docker-compose-maven-plugin.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
 </project>
 

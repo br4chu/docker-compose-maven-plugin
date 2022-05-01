@@ -4,12 +4,16 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin-test-harness-09</artifactId>
-    <version>0.10.0-SNAPSHOT</version>
 
-    <name>${project.groupId}:${project.artifactId}</name>
-    <description>Testing harness for docker-compose-maven-plugin.</description>
+    <parent>
+        <groupId>io.brachu</groupId>
+        <artifactId>docker-compose-maven-plugin-parent</artifactId>
+        <version>0.10.0-SNAPSHOT</version>
+    </parent>
+
+    <name>Docker Compose Maven Plugin - Test Harness 09</name>
+    <description>Testing harness for docker-compose-maven-plugin</description>
     <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
 
     <licenses>
@@ -46,8 +50,8 @@
         <maven-invoker.version>3.2.0</maven-invoker.version>
 
         <!-- Plugins -->
+        <docker-compose-plugin.version>${project.version}</docker-compose-plugin.version>
         <failsafe-plugin.version>2.22.2</failsafe-plugin.version>
-        <docker-compose-plugin.version>0.10.0-SNAPSHOT</docker-compose-plugin.version>
     </properties>
 
     <dependencies>
