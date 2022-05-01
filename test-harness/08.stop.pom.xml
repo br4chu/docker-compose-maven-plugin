@@ -51,7 +51,6 @@
 
         <!-- Plugins -->
         <failsafe-plugin.version>2.22.2</failsafe-plugin.version>
-        <docker-compose-plugin.version>${project.version}</docker-compose-plugin.version>
     </properties>
 
     <dependencies>
@@ -95,7 +94,7 @@
             <plugin>
                 <groupId>io.brachu</groupId>
                 <artifactId>docker-compose-maven-plugin</artifactId>
-                <version>${docker-compose-plugin.version}</version>
+                <version>${project.version}</version>
                 <configuration>
                     <file>src/test/resources/08.docker-compose.yml</file>
                 </configuration>

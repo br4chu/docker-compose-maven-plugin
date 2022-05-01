@@ -42,9 +42,6 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <!-- Plugins -->
-        <docker-compose-plugin.version>${project.version}</docker-compose-plugin.version>
     </properties>
 
     <build>
@@ -58,7 +55,7 @@
             <plugin>
                 <groupId>io.brachu</groupId>
                 <artifactId>docker-compose-maven-plugin</artifactId>
-                <version>${docker-compose-plugin.version}</version>
+                <version>${project.version}</version>
                 <configuration>
                     <file>src/test/resources/10.docker-compose.yml</file>
                     <workDir>nonexisting/dir</workDir>
