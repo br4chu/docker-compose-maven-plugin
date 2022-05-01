@@ -157,6 +157,4 @@
         </module>
         <module name="CommentsIndentation" />
     </module>
-
-    <module name="JavadocPackage" />
 </module>
