@@ -43,6 +43,7 @@
         <johann.version>1.4.0</johann.version>
         <jool.version>0.9.14</jool.version>
         <maven.version>3.8.5</maven.version>
+        <pig.version>0.1.1</pig.version>
 
         <!-- Plugins -->
         <checkstyle-plugin.version>3.1.2</checkstyle-plugin.version>
@@ -53,7 +54,6 @@
         <jar-plugin.version>3.2.2</jar-plugin.version>
         <javadoc-plugin.version>3.4.0</javadoc-plugin.version>
         <maven-plugin.version>3.6.4</maven-plugin.version>
-        <package-info-plugin.version>2.0.0</package-info-plugin.version>
         <release-plugin.version>2.5.3</release-plugin.version>
         <source-plugin.version>3.2.1</source-plugin.version>
         <spotbugs-plugin.version>4.6.0.0</spotbugs-plugin.version>
@@ -108,31 +108,6 @@
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>de.shadowhunt.maven.plugins</groupId>
-                <artifactId>package-info-maven-plugin</artifactId>
-                <version>${package-info-plugin.version}</version>
-                <configuration>
-                    <outputDirectory>plugin/src/main/java</outputDirectory>
-                    <packages>
-                        <package>
-                            <annotations>
-                                <annotation>@javax.annotation.ParametersAreNonnullByDefault</annotation>
-                            </annotations>
-                            <regex>io\.brachu\..*</regex>
-                        </package>
-                    </packages>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>package-info</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
             <plugin>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-maven-plugin</artifactId>
@@ -196,6 +171,13 @@
                 <version>${compiler-plugin.version}</version>
                 <configuration>
                     <parameters>true</parameters>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>io.brachu</groupId>
+                            <artifactId>pig</artifactId>
+                            <version>${pig.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 
