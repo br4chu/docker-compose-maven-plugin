@@ -54,9 +54,12 @@
     <properties>
         <checkstyle.rules.path>checkstyle.xml</checkstyle.rules.path>
         <gpg.keyname>9A481873</gpg.keyname>
+        <gpg.skip>true</gpg.skip>
         <java.version>1.8</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
+        <maven.javadoc.skip>true</maven.javadoc.skip>
+        <maven.source.skip>true</maven.source.skip>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 
@@ -82,18 +85,12 @@
 
     <profiles>
         <profile>
-            <id>default</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <maven.source.skip>true</maven.source.skip>
-                <maven.javadoc.skip>true</maven.javadoc.skip>
-                <gpg.skip>true</gpg.skip>
-            </properties>
-        </profile>
-        <profile>
             <id>release</id>
+            <properties>
+                <maven.source.skip>false</maven.source.skip>
+                <maven.javadoc.skip>false</maven.javadoc.skip>
+                <gpg.skip>false</gpg.skip>
+            </properties>
         </profile>
     </profiles>
 
