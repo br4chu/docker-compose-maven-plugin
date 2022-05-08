@@ -9,7 +9,7 @@
     <parent>
         <groupId>io.brachu</groupId>
         <artifactId>docker-compose-maven-plugin-parent</artifactId>
-        <version>0.10.0</version>
+        <version>0.11.0</version>
     </parent>
 
     <name>Docker Compose Maven Plugin - Test Harness 02</name>
@@ -45,7 +45,7 @@
 
         <!-- Dependencies -->
         <assertj.version>3.22.0</assertj.version>
-        <johann.version>1.4.0</johann.version>
+        <johann.version>1.5.0</johann.version>
         <junit.version>4.13.2</junit.version>
         <maven-invoker.version>3.2.0</maven-invoker.version>
 

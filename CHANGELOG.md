@@ -1,3 +1,9 @@
+# 0.11.0
+
+Update Johann dependency to version 1.5.0.
+
+`down` goal will no longer fail if `killBeforeDown` property is set to `true` and cluster is already down. Such operation will be logged instead.
+
 # 0.10.0
 
 Update Johann dependency to version 1.4.0. This should fix any potential issues when running against Docker Compose v2.x.

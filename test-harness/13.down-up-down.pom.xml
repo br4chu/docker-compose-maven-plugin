@@ -4,7 +4,7 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>docker-compose-maven-plugin-test-harness-01</artifactId>
+    <artifactId>docker-compose-maven-plugin-test-harness-13</artifactId>
 
     <parent>
         <groupId>io.brachu</groupId>
@@ -12,7 +12,7 @@
         <version>0.11.0</version>
     </parent>
 
-    <name>Docker Compose Maven Plugin - Test Harness 01</name>
+    <name>Docker Compose Maven Plugin - Test Harness 13</name>
     <description>Testing harness for docker-compose-maven-plugin</description>
     <url>https://github.com/br4chu/docker-compose-maven-plugin</url>
 
@@ -48,9 +48,6 @@
         <johann.version>1.5.0</johann.version>
         <junit.version>4.13.2</junit.version>
         <maven-invoker.version>3.2.0</maven-invoker.version>
-
-        <!-- Plugins -->
-        <failsafe-plugin.version>2.22.2</failsafe-plugin.version>
     </properties>
 
     <dependencies>
@@ -62,16 +59,16 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
+            <groupId>io.brachu</groupId>
+            <artifactId>johann</artifactId>
+            <version>${johann.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.brachu</groupId>
-            <artifactId>johann</artifactId>
-            <version>${johann.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -97,31 +94,24 @@
                 <version>${project.version}</version>
                 <executions>
                     <execution>
+                        <id>clean-before-up</id>
+                        <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>up</goal>
                             <goal>down</goal>
                         </goals>
                     </execution>
-                </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-failsafe-plugin</artifactId>
-                <version>${failsafe-plugin.version}</version>
-                <configuration>
-                    <includes>
-                        <include>**/DefaultsIT.java</include>
-                    </includes>
-                    <excludes>
-                        <exclude>**/Abstract*.java</exclude>
-                    </excludes>
-                </configuration>
-                <executions>
                     <execution>
+                        <id>up</id>
+                        <phase>pre-integration-test</phase>
                         <goals>
-                            <goal>integration-test</goal>
-                            <goal>verify</goal>
+                            <goal>up</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>down</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>down</goal>
                         </goals>
                     </execution>
                 </executions>

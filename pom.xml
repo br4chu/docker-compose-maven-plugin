@@ -6,7 +6,7 @@
 
     <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin-parent</artifactId>
-    <version>0.10.0</version>
+    <version>0.11.0</version>
     <packaging>pom</packaging>
 
     <name>Docker Compose Maven Plugin Parent</name>
@@ -27,6 +27,7 @@
         <module>test-harness/10.workdir.pom.xml</module>
         <module>test-harness/11.followlogs.pom.xml</module>
         <module>test-harness/12.build.pom.xml</module>
+        <module>test-harness/13.down-up-down.pom.xml</module>
     </modules>
 
     <licenses>
@@ -57,4 +58,3 @@
     </scm>
 
 </project>
-

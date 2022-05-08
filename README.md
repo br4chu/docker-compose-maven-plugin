@@ -33,12 +33,16 @@ docker-compose-maven-plugin currently implements 4 goals:
 2. Add docker-compose-maven-plugin to your build descriptor as follows:
 
 ```xml
+<properties>
+    <docker-compose-plugin.version>0.11.0</docker-compose-plugin.version>
+</properties>
+...
 <build>
     <plugins>
         <plugin>
             <groupId>io.brachu</groupId>
             <artifactId>docker-compose-maven-plugin</artifactId>
-            <version>0.10.0</version>
+            <version>${docker-compose-plugin.version}</version>
             <executions>
                 <execution>
                     <goals>
@@ -52,16 +56,15 @@ docker-compose-maven-plugin currently implements 4 goals:
 </build>
 ```
 
-3. Run your integration tests with `mvn verify` command. You should then see your docker-compose cluster starting up before tests and shutting down after the
+3. Run your integration tests with `mvn verify` command. You should then see your docker-compose cluster start up before tests and shut down after the
 tests are done.
 
-Above configuration is minimalistic but gets the job done. See "Configuration" section for more details on how to better configure these goals according to your
-needs.
+Above configuration is minimalistic but gets the job done. See "Configuration" section for more options on how you can tune these goals to your needs.
 
 ## Integration tests (start & stop goals)
 
 You can use "start" and "stop" goals as an alternative to standard "up & down" flow. Some projects may configure integration tests to be only
-run on certain dedicated machines where constantly creating and destroying containers may be too time-consuming. In such cases it may be better to
+run on certain dedicated machines where creating and destroying containers may be too time-consuming. In such cases it may be better to
 leave certain services up between Maven builds and only restart services that require it.
 You can also mix "start" and "stop" goals with "up" and "down" goals for more complex build flows by leveraging Maven's profiles and multiple executions.
 
@@ -74,7 +77,7 @@ Below is an example configuration which starts and stops `postgresql` and `rabbi
         <plugin>
             <groupId>io.brachu</groupId>
             <artifactId>docker-compose-maven-plugin</artifactId>
-            <version>0.10.0</version>
+            <version>${docker-compose-plugin.version}</version>
             <executions>
                 <execution>
                     <goals>
@@ -119,11 +122,11 @@ Properties are added to plugin's `<configuration>` descriptor. For example:
 <plugin>
     <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin</artifactId>
-    <version>0.10.0</version>
+    <version>${docker-compose-plugin.version}</version>
     <configuration>
         <projectName>myproject</projectName>
         <file>src/test/resources/custom.docker-compose.yml</file>
-        <workDir>src/tests/resources</workDir>
+        <workDir>src/test/resources</workDir>
         <env>
             <EXTERNAL_PGSQL_PORT>5432</EXTERNAL_PGSQL_PORT>
         </env>
