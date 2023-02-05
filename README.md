@@ -3,12 +3,13 @@
 **docker-compose-maven-plugin** is a Maven plugin that talks to docker-compose command-line interface.
 
 Currently implemented docker-compose commands (exposed as Maven goals) are:
+
 * up & down
 * start & stop
 
 # Requirements
 
-* JDK8+
+* JDK 11+
 * Maven 3+
 
 This project also depends on [Johann](https://github.com/br4chu/johann) library and inherits its requirements:
@@ -19,6 +20,7 @@ This project also depends on [Johann](https://github.com/br4chu/johann) library 
 # Goals
 
 docker-compose-maven-plugin currently implements 4 goals:
+
 * docker-compose:up (bound to pre-integration-test phase by default)
 * docker-compose:down (bound to post-integration-test phase by default)
 * docker-compose:start (bound to pre-integration-test phase by default)
@@ -33,10 +35,14 @@ docker-compose-maven-plugin currently implements 4 goals:
 2. Add docker-compose-maven-plugin to your build descriptor as follows:
 
 ```xml
+
 <properties>
-    <docker-compose-plugin.version>0.11.0</docker-compose-plugin.version>
+    <docker-compose-plugin.version>1.0.0</docker-compose-plugin.version>
 </properties>
-...
+```
+
+```xml
+
 <build>
     <plugins>
         <plugin>
@@ -57,7 +63,7 @@ docker-compose-maven-plugin currently implements 4 goals:
 ```
 
 3. Run your integration tests with `mvn verify` command. You should then see your docker-compose cluster start up before tests and shut down after the
-tests are done.
+   tests are done.
 
 Above configuration is minimalistic but gets the job done. See "Configuration" section for more options on how you can tune these goals to your needs.
 
@@ -72,6 +78,7 @@ Below is an example configuration which starts and stops `postgresql` and `rabbi
 *src/test/resources* directory.
 
 ```xml
+
 <build>
     <plugins>
         <plugin>
@@ -106,19 +113,20 @@ Below is an example configuration which starts and stops `postgresql` and `rabbi
 
 All goals have following properties:
 
-| Property | Description | Default value |
-| --- | --- | --- |
-| env | A map of custom environment variables that will be passed to docker-compose CLI. | Empty map |
-| executablePath | Path to docker-compose executable file. If left blank, it will be assumed that docker-compose is accessible from operating system's PATH. | `""` |
-| workDir | Path to a directory that will be set as a working directory of docker-compose process. All relative paths defined in docker-compose.yml file will be resolved against this directory. If set to relative path, it will be resolved against `${project.basedir}`. If set to blank, working directory will be the same as working directory of JVM process that started this plugin which is usually a directory from which Maven was run. | `${project.basedir}` |
-| file | Path to docker-compose.yml file. If relative, it will be appended to Maven's `${project.basedir}`. | `"src/test/resources/docker-compose.yml"` |
-| projectName | Name of docker-compose project. It will be passed directly to docker-compose CLI. | Random 8-letter string |
-| wait | Specifies how long should this plugin wait for a cluster/service to be healthy (or running if they do not implement a health check). Timeouts result in a build failure. This property is used only by "up" and "start" goals. | 1 minute |
-| skip | Decides if an execution of a goal should be skipped entirely. You can also set `dockerCompose.skip` Maven property to `true` to achieve similar effect. Be advised that skipping execution of an `up` goal without skipping execution of a `down` goal may result in an unexpected behaviour if a `projectName` property is not provided explicitly. | `false` |
+| Property       | Description                                                                                                                                                                                                                                                                                                                                                                                                                              | Default value                             |
+|----------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------|
+| env            | A map of custom environment variables that will be passed to docker-compose CLI.                                                                                                                                                                                                                                                                                                                                                         | Empty map                                 |
+| executablePath | Path to docker-compose executable file. If left blank, it will be assumed that docker-compose is accessible from operating system's PATH.                                                                                                                                                                                                                                                                                                | `""`                                      |
+| workDir        | Path to a directory that will be set as a working directory of docker-compose process. All relative paths defined in docker-compose.yml file will be resolved against this directory. If set to relative path, it will be resolved against `${project.basedir}`. If set to blank, working directory will be the same as working directory of JVM process that started this plugin which is usually a directory from which Maven was run. | `${project.basedir}`                      |
+| file           | Path to docker-compose.yml file. If relative, it will be appended to Maven's `${project.basedir}`.                                                                                                                                                                                                                                                                                                                                       | `"src/test/resources/docker-compose.yml"` |
+| projectName    | Name of docker-compose project. It will be passed directly to docker-compose CLI.                                                                                                                                                                                                                                                                                                                                                        | Random 8-letter string                    |
+| wait           | Specifies how long should this plugin wait for a cluster/service to be healthy (or running if they do not implement a health check). Timeouts result in a build failure. This property is used only by "up" and "start" goals.                                                                                                                                                                                                           | 1 minute                                  |
+| skip           | Decides if an execution of a goal should be skipped entirely. You can also set `dockerCompose.skip` Maven property to `true` to achieve similar effect. Be advised that skipping execution of an `up` goal without skipping execution of a `down` goal may result in an unexpected behaviour if a `projectName` property is not provided explicitly.                                                                                     | `false`                                   |
 
 Properties are added to plugin's `<configuration>` descriptor. For example:
 
 ```xml
+
 <plugin>
     <groupId>io.brachu</groupId>
     <artifactId>docker-compose-maven-plugin</artifactId>
@@ -150,34 +158,34 @@ Properties are added to plugin's `<configuration>` descriptor. For example:
 
 `up` goal can also be parametrized with following properties:
 
-| Property | Description | Default value |
-| --- | --- | --- |
-| forceBuild | When set to `true`, forces docker-compose to build images for services which have their `build:` section specified in docker-compose.yml file. Behaviour is the same as passing `--build` flag to `docker-compose up` command | `false` |
-| followLogs | Boolean flag that triggers the reading of docker-compose logs. The effect of setting this parameter to `true` would be the same as running `docker-compose logs -f` command in a different terminal window after this goal finishes executing, but logs will instead be redirected to `System.out` (for standard output) and `System.err` (for standard error) of JVM process that runs this goal. | `false` |
+| Property   | Description                                                                                                                                                                                                                                                                                                                                                                                        | Default value |
+|------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| forceBuild | When set to `true`, forces docker-compose to build images for services which have their `build:` section specified in docker-compose.yml file. Behaviour is the same as passing `--build` flag to `docker-compose up` command                                                                                                                                                                      | `false`       |
+| followLogs | Boolean flag that triggers the reading of docker-compose logs. The effect of setting this parameter to `true` would be the same as running `docker-compose logs -f` command in a different terminal window after this goal finishes executing, but logs will instead be redirected to `System.out` (for standard output) and `System.err` (for standard error) of JVM process that runs this goal. | `false`       |
 
 ## Properties of `down` goal
 
 `down` goal can also be parametrized with following properties:
 
-| Property | Description | Default value |
-| --- | --- | --- |
-| removeVolumes | If set to `true`, removes named volumes declared in the `volumes` section of the Compose file and anonymous volumes attached to containers. | `true` |
-| removeOrphans | If set to `true`, removes containers for services not defined in the Compose file. | `false` |
-| downTimeoutSeconds | Specifies how long in seconds should docker-compose wait for cluster shutdown. | `10` |
-| killBeforeDown | Should 'down' goal kill all containers in the cluster before removing the cluster? | `true` |
+| Property           | Description                                                                                                                                 | Default value |
+|--------------------|---------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| removeVolumes      | If set to `true`, removes named volumes declared in the `volumes` section of the Compose file and anonymous volumes attached to containers. | `true`        |
+| removeOrphans      | If set to `true`, removes containers of services not defined in the Compose file.                                                           | `false`       |
+| downTimeoutSeconds | Specifies how long in seconds should docker-compose wait for cluster shutdown.                                                              | `10`          |
+| killBeforeDown     | Should 'down' goal kill all containers in the cluster before removing the cluster?                                                          | `true`        |
 
 ## Properties of `start` goal
 
 `start` goal can also be parametrized with following properties:
 
-| Property | Description | Default value |
-| --- | --- | --- |
-| startServices | Names of services (as specified in a compose file) that will be started during execution of this goal. Services will be started in the same order as defined by this list. Empty list indicates that all services will be started. Starting an already started service has no effect. | Empty list |
+| Property      | Description                                                                                                                                                                                                                                                                           | Default value |
+|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| startServices | Names of services (as specified in a compose file) that will be started during execution of this goal. Services will be started in the same order as defined by this list. Empty list indicates that all services will be started. Starting an already started service has no effect. | Empty list    |
 
 ## Properties of `stop` goal
 
 `stop` goal can also be parametrized with following properties:
 
-| Property | Description | Default value |
-| --- | --- | --- |
-| stopServices | Names of services (as specified in a compose file) that will be stopped during execution of this goal. Services will be stopped in the same order as defined by this list. Empty list indicates that all services will be stopped. Stopping an already stopped service has no effect. | Empty list |
+| Property     | Description                                                                                                                                                                                                                                                                           | Default value |
+|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|
+| stopServices | Names of services (as specified in a compose file) that will be stopped during execution of this goal. Services will be stopped in the same order as defined by this list. Empty list indicates that all services will be stopped. Stopping an already stopped service has no effect. | Empty list    |

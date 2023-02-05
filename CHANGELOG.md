@@ -1,8 +1,12 @@
+# 1.0.0
+
+Update Johann dependency to version 2.0.0. Project is now compiled against JDK 11 because Johann dependency requires it.
+
 # 0.11.0
 
 Update Johann dependency to version 1.5.0.
 
-`down` goal will no longer fail if `killBeforeDown` property is set to `true` and cluster is already down. Such operation will be logged instead.
+`down` goal will no longer fail if `killBeforeDown` property is set to `true` and cluster is already down. Such action will be logged instead.
 
 # 0.10.0
 
@@ -33,6 +37,7 @@ Improved error message when a timeout occurs. Previous message printed entire st
 a bug in the plugin which was usually not the case.
 
 Added new Maven goals:
+
 * start (bound to pre-integration-test phase by default)
 * stop (bound to post-integration-test phase by default)
 
@@ -59,6 +64,7 @@ Refer to README or javadocs of DownMojo for more information.
 Updated Johann dependency to version 0.5.0.
 
 Parametrized "down" goal with properties:
+
 * removeVolumes (defaults to `true`)
 * removeOrphans (default to `false`)
 * downTimeoutSeconds (defaults to 10)
